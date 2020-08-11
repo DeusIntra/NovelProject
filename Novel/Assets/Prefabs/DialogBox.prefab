@@ -572,8 +572,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074ea41691165cb4a90883676f9cf641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UseFaceIcon: 1
-  FaceSide: 0
+  useFaceIcon: 0
+  faceIconSide: 0
+  useNameBox: 0
+  DefaultTextStyle: {fileID: 11400000, guid: 083578cf7f605e54d83fe170a9acd032, type: 2}
   _body: {fileID: 121453577839158349}
   _nameBox: {fileID: 121453578853785639}
   _faceIconObject: {fileID: 2955137845407450296}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Dialog Node", menuName = "Scriptable Object/Dialog/Node", order = 52)]
@@ -24,6 +25,7 @@ public class DialogNode : ScriptableObject
     #region Fields
 
     [SerializeField] private List<Quote> _quotes = new List<Quote>();
+    [SerializeField] private TMP_FontAsset _nodeFont;
     [SerializeField] private List<Choice> _choices = null;
     [SerializeField] private DialogNode _nextNode = null;
     [SerializeField] private GameEvent _onEndNode = null;
@@ -53,10 +55,15 @@ public class DialogNode : ScriptableObject
 
         else
         {
-            _currentQuoteIndex = -1;
+            Reset();
             _onEndNode?.Raise();
             return null; // should present choices
         }
+    }
+
+    public void Reset()
+    {
+        _currentQuoteIndex = -1;
     }
 
     #endregion

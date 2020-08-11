@@ -11,8 +11,10 @@ public class DialogBox : MonoBehaviour
 
     [Header("Header")]
     //[Tooltip("Tooltip")]
-    public bool UseFaceIcon;
-    public Side FaceSide;
+    public bool useFaceIcon;
+    public Side faceIconSide;
+    public bool useNameBox;
+    public TextStyle DefaultTextStyle;
     // opening animation
     // closing animation
     // choice opening animation
@@ -107,7 +109,7 @@ public class DialogBox : MonoBehaviour
         ShowFaceIcon(quote);
         SetFontAndColor(quote);
 
-        _nameBox.SetActive(quote.CharacterName != "");
+        _nameBox.SetActive(quote.CharacterName != "" && useNameBox);
 
         _nameText.text = quote.CharacterName;
         _bodyText.text = quote.Text;
@@ -166,7 +168,7 @@ public class DialogBox : MonoBehaviour
     private void ShowFaceIcon(Quote quote)
     {
         Sprite faceSprite = quote.FaceIcon;
-        if (!UseFaceIcon || faceSprite == null)
+        if (!useFaceIcon || faceSprite == null)
         {
             _faceIconObject.SetActive(false);
 
@@ -181,7 +183,7 @@ public class DialogBox : MonoBehaviour
 
         _bodyTextRectTransform.sizeDelta = new Vector2(-320, -30);
 
-        switch (FaceSide)
+        switch (faceIconSide)
         {
             case Side.Left:
                 _faceIconRectTransform.anchorMin = Vector2.zero;
@@ -215,8 +217,9 @@ public class DialogBox : MonoBehaviour
 
     private void SetFontAndColor(Quote quote)
     {
-        if (quote.Font != null) _bodyText.font = quote.Font;
-        _bodyText.color = quote.FontColor;
+        _bodyText.font = quote.Font ?? DefaultTextStyle.Font;
+        _bodyText.fontSize = quote.FontSize != 0 ? quote.FontSize : DefaultTextStyle.FontSize;
+        _bodyText.color = quote.TextColor ?? DefaultTextStyle.TextColor;
     }
 
     [ContextMenu("RT")]

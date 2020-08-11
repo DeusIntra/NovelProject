@@ -10,7 +10,7 @@ public class Quote
     [SerializeField] private Sprite _faceIcon = null;
     [SerializeField] private DialogCharacter _character = null;
     [SerializeField] private TMP_FontAsset _font = null;
-    [ColorUsage(false)][SerializeField] private Color _fontColor = Color.black;
+    [SerializeField] private int _fontSize = 0;
 
     public string CharacterName
     {
@@ -42,14 +42,21 @@ public class Quote
         }
     }
     
-    ///// to redo this
-    public Color FontColor
+    public Color? TextColor
     {
         get
         {
-            if (_character != null && _character.FontColor != null)
-                return _character.FontColor;
-            return Color.black;
+            if (_character != null && _character.UseTextColor)
+                return _character.TextColor;
+            return null;
+        }
+    }
+
+    public int FontSize { get
+        {
+            if (_character != null && _character.FontSize != 0)
+                return _character.FontSize;
+            return _fontSize;                
         }
     }
 }

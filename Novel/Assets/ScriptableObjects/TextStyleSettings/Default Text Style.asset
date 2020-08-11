@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c29a0c11aa7f05b4bb6b9c3fe0af3650, type: 3}
-  m_Name: Yes
+  m_Script: {fileID: 11500000, guid: 43ca4c8e9492f794691a72d7f82a248f, type: 3}
+  m_Name: Default Text Style
   m_EditorClassIdentifier: 
-  _quotes:
-  - _speakerName: 
-    _sentence: I say yes
-  - _speakerName: Lorem
-    _sentence: Nice
-  _choices: []
-  _nextNode: {fileID: 11400000, guid: 9e7ba75bd77c077428c88c8e76efcf3f, type: 2}
+  _textColor: {r: 0, g: 0, b: 0, a: 0}
+  _font: {fileID: 0}
+  _fontSize: 24

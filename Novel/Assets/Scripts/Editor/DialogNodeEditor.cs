@@ -14,7 +14,7 @@ public class DialogNodeEditor : Editor
 
     private void OnEnable() 
     {
-        _script = base.serializedObject.FindProperty("m_Script");
+        _script = serializedObject.FindProperty("m_Script");
         _quotesProperty = serializedObject.FindProperty("_quotes");
         _choicesProperty = serializedObject.FindProperty("_choices");
         _nextNodeProperty = serializedObject.FindProperty("_nextNode");

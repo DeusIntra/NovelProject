@@ -10,28 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c29a0c11aa7f05b4bb6b9c3fe0af3650, type: 3}
-  m_Name: Double Trouble is here
+  m_Name: Goodbye
   m_EditorClassIdentifier: 
   _quotes:
-  - _characterName: 
-    _text: Apologies for being rude. I was getting into character. Did it work? Be
-      honest.
-    _faceIcon: {fileID: 0}
-    _character: {fileID: 11400000, guid: 9a8f4a3ebc9b4a545afc499904d656a4, type: 2}
-    _font: {fileID: 0}
-    _fontColor: {r: 0, g: 0, b: 0, a: 0}
-  - _characterName: 
-    _text: As always, I am open to constructive criticism.
-    _faceIcon: {fileID: 0}
-    _character: {fileID: 11400000, guid: 9a8f4a3ebc9b4a545afc499904d656a4, type: 2}
-    _font: {fileID: 0}
-    _fontColor: {r: 0, g: 0, b: 0, a: 0}
-  - _characterName: ???
-    _text: A shapeshifter...
+  - _characterName: Lorem
+    _text: Ok Bye!
     _faceIcon: {fileID: 0}
     _character: {fileID: 0}
     _font: {fileID: 0}
-    _fontColor: {r: 0, g: 0, b: 0, a: 0}
+    _fontSize: 0
+  - _characterName: You
+    _text: Bye!
+    _faceIcon: {fileID: 0}
+    _character: {fileID: 0}
+    _font: {fileID: 0}
+    _fontSize: 0
+  _nodeFont: {fileID: 0}
   _choices: []
   _nextNode: {fileID: 0}
   _onEndNode: {fileID: 11400000, guid: 77815beafe14f744d8e1e43e8ff5d408, type: 2}

@@ -13,21 +13,25 @@ MonoBehaviour:
   m_Name: Hello
   m_EditorClassIdentifier: 
   _quotes:
-  - _characterName: 
-    _text: 
+  - _characterName: Lorem
+    _text: Hello!
     _faceIcon: {fileID: 0}
     _character: {fileID: 0}
     _font: {fileID: 0}
-  - _characterName: 
-    _text: 
+    _fontSize: 0
+  - _characterName: Lorem
+    _text: Me name is Lorem
     _faceIcon: {fileID: 0}
     _character: {fileID: 0}
     _font: {fileID: 0}
-  - _characterName: 
-    _text: 
+    _fontSize: 0
+  - _characterName: Lorem
+    _text: Do you like movies?
     _faceIcon: {fileID: 0}
     _character: {fileID: 0}
     _font: {fileID: 0}
+    _fontSize: 0
+  _nodeFont: {fileID: 0}
   _choices:
   - _text: Yes
     _nextNode: {fileID: 11400000, guid: f01e587af4fba684592245f7cd8ea845, type: 2}

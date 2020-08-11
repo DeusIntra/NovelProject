@@ -10,23 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c29a0c11aa7f05b4bb6b9c3fe0af3650, type: 3}
-  m_Name: No
+  m_Name: Yes
   m_EditorClassIdentifier: 
   _quotes:
-  - _speakerName: 
-    _sentence: 'I say no
-
-      But thanks anyway'
+  - _characterName: You
+    _text: Yeah, I like movies!
     _faceIcon: {fileID: 0}
     _character: {fileID: 0}
-  - _speakerName: Lorem
-    _sentence: Your loss...
+    _font: {fileID: 0}
+    _fontSize: 0
+  - _characterName: Lorem
+    _text: Awesome!
     _faceIcon: {fileID: 0}
     _character: {fileID: 0}
-  - _speakerName: 
-    _sentence: Still no
-    _faceIcon: {fileID: 0}
-    _character: {fileID: 0}
+    _font: {fileID: 0}
+    _fontSize: 0
+  _nodeFont: {fileID: 0}
   _choices: []
   _nextNode: {fileID: 11400000, guid: 9e7ba75bd77c077428c88c8e76efcf3f, type: 2}
   _onEndNode: {fileID: 0}

@@ -349,13 +349,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4698056697938365515}
-        m_TargetAssemblyTypeName: Novel.Dialog.DialogBox, Assembly-CSharp
+        m_TargetAssemblyTypeName: DialogBox, Assembly-CSharp
         m_MethodName: Open
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: a47c127cc99324a49bdce34a51de6b7e,
+          m_ObjectArgument: {fileID: 11400000, guid: 8660ef110e04f664989a128d54e55960,
             type: 2}
-          m_ObjectArgumentAssemblyTypeName: Novel.Dialog.DialogNode, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: DialogNode, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
