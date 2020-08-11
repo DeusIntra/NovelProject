@@ -1,16 +1,6 @@
 ﻿using UnityEngine;
 
-public class DefaultParameters : MonoBehaviour
+public class DefaultParameters : ScriptableObject
 {
-    
-    private void Start()
-    {
-        
-    }
 
-
-    private void Update()
-    {
-        
-    }
 }
