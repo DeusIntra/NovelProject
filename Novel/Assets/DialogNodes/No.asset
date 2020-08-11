@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29a0c11aa7f05b4bb6b9c3fe0af3650, type: 3}
+  m_Name: No
+  m_EditorClassIdentifier: 
+  _quotes:
+  - _speakerName: 
+    _sentence: 'I say no
+
+      But thanks anyway'
+    _faceIcon: {fileID: 0}
+    _character: {fileID: 0}
+  - _speakerName: Lorem
+    _sentence: Your loss...
+    _faceIcon: {fileID: 0}
+    _character: {fileID: 0}
+  - _speakerName: 
+    _sentence: Still no
+    _faceIcon: {fileID: 0}
+    _character: {fileID: 0}
+  _choices: []
+  _nextNode: {fileID: 11400000, guid: 9e7ba75bd77c077428c88c8e76efcf3f, type: 2}
+  _onEndNode: {fileID: 0}

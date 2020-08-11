@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29a0c11aa7f05b4bb6b9c3fe0af3650, type: 3}
+  m_Name: Hello
+  m_EditorClassIdentifier: 
+  _quotes:
+  - _characterName: 
+    _text: 
+    _faceIcon: {fileID: 0}
+    _character: {fileID: 0}
+    _font: {fileID: 0}
+  - _characterName: 
+    _text: 
+    _faceIcon: {fileID: 0}
+    _character: {fileID: 0}
+    _font: {fileID: 0}
+  - _characterName: 
+    _text: 
+    _faceIcon: {fileID: 0}
+    _character: {fileID: 0}
+    _font: {fileID: 0}
+  _choices:
+  - _text: Yes
+    _nextNode: {fileID: 11400000, guid: f01e587af4fba684592245f7cd8ea845, type: 2}
+    _onChoice: {fileID: 11400000, guid: 896aacf91272bec4cae10282b05899da, type: 2}
+  - _text: No
+    _nextNode: {fileID: 11400000, guid: 2fa288db79c559b44a04cb08aff1e0fa, type: 2}
+    _onChoice: {fileID: 11400000, guid: 6d5312733d692854eabb0922ca08d5a0, type: 2}
+  _nextNode: {fileID: 0}
+  _onEndNode: {fileID: 0}
