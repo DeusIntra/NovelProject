@@ -59,10 +59,9 @@ public class DialogBox : MonoBehaviour
 
     #region Public methods
 
-    public void Open(DialogNode firstNode)
+    public void Open()
     {
         gameObject.SetActive(true);
-        StartDialog(firstNode);
     }
 
     public void Close()
@@ -73,6 +72,7 @@ public class DialogBox : MonoBehaviour
     public void StartDialog(DialogNode firstNode = null)
     {
         if (firstNode != null) _currentNode = firstNode;
+        Open();
         PlayDialog();
     }
 

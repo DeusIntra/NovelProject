@@ -1,4 +1,4 @@
-Icons for DialogueNode and GameEvent are made by Freepik from www.flaticon.com
+Icons for DialogueNode, DialogCharacter, TextStyle and GameEvent are made by Freepik from www.flaticon.com
 
   //)   _
 / < ^\/

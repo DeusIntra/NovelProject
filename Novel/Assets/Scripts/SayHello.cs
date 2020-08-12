@@ -17,4 +17,9 @@ public class SayHello : MonoBehaviour
         Debug.Log("No");
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
 }
