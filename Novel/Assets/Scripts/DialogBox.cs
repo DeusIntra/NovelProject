@@ -18,7 +18,7 @@ public class DialogBox : MonoBehaviour
     // opening animation
     // closing animation
     // choice opening animation
-    // choice closing
+    // choice closing animation
         
     [Space]
     [Header("Child GameObjects")]
@@ -36,7 +36,6 @@ public class DialogBox : MonoBehaviour
     private RectTransform _bodyTextRectTransform;
     private RectTransform _faceIconRectTransform;
     private List<DialogNode.Choice> _choices;
-    private List<GameObject> _choiceButtons;
     private DialogNode _currentNode;
 
     #endregion
@@ -51,7 +50,6 @@ public class DialogBox : MonoBehaviour
         _bodyTextRectTransform = _bodyText.GetComponent<RectTransform>();
         _faceIconRectTransform = _faceIconObject.GetComponent<RectTransform>();
         _choices = new List<DialogNode.Choice>();
-        _choiceButtons = new List<GameObject>();
         _currentNode = null;
     }
 
