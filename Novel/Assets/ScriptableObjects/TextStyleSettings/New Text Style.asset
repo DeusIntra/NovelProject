@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ca4c8e9492f794691a72d7f82a248f, type: 3}
   m_Name: New Text Style
   m_EditorClassIdentifier: 
-  _textColor: {r: 0, g: 0, b: 0, a: 0}
+  _textColor: {r: 0.5921569, g: 0.050980397, b: 0.050980397, a: 1}
   _font: {fileID: 0}
   _fontSize: 0

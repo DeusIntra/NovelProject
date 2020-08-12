@@ -153,9 +153,9 @@ public class DialogBox : MonoBehaviour
 
     private void DestroyChoices()
     {
-        foreach (GameObject button in _choiceButtons)
+        foreach (Transform button in _choicePanel.transform)
         {
-            Destroy(button);
+            Destroy(button.gameObject);
         }
 
         _choicePanel.SetActive(false);
