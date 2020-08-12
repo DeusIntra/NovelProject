@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,15 +8,18 @@ using UnityEngine.UI;
 public class DialogBox : MonoBehaviour
 {
     public enum Side { Left, Right };
+    public enum TextAppearingAnimation { None, LetterByLetter, WordByWord}
 
     #region Fields
 
     [Header("Header")]
     //[Tooltip("Tooltip")]
-    public bool useFaceIcon;
-    public Side faceIconSide;
-    public bool useNameBox;
-    public TextStyle DefaultTextStyle;
+    public bool useFaceIcon = true;
+    public Side faceIconSide = Side.Left;
+    public bool useNameBox = true;
+    public TextAppearingAnimation textAppearingAnimation = TextAppearingAnimation.LetterByLetter;
+    public float textAppearingSpeed = 10f;
+    public TextStyle defaultTextStyle;
     // opening animation
     // closing animation
     // choice opening animation
@@ -37,6 +42,7 @@ public class DialogBox : MonoBehaviour
     private RectTransform _faceIconRectTransform;
     private List<DialogNode.Choice> _choices;
     private DialogNode _currentNode;
+    private bool _isTextAnimating;
 
     #endregion
 
@@ -104,13 +110,20 @@ public class DialogBox : MonoBehaviour
             return;
         }
 
+        if (_isTextAnimating)
+        {
+            StopTextAppearingAnimation();
+            return;
+        }
+
         ShowFaceIcon(quote);
         SetFontAndColor(quote);
 
         _nameBox.SetActive(quote.CharacterName != "" && useNameBox);
-
         _nameText.text = quote.CharacterName;
         _bodyText.text = quote.Text;
+
+        StartCoroutine(TextAppearingAnimationCoroutine());
     }
 
     public void SetNode(DialogNode nextNode)
@@ -215,9 +228,84 @@ public class DialogBox : MonoBehaviour
 
     private void SetFontAndColor(Quote quote)
     {
-        _bodyText.font = quote.Font ?? DefaultTextStyle.Font;
-        _bodyText.fontSize = quote.FontSize != 0 ? quote.FontSize : DefaultTextStyle.FontSize;
-        _bodyText.color = quote.TextColor ?? DefaultTextStyle.TextColor;
+        _bodyText.font = quote.Font ?? defaultTextStyle.Font;
+        _bodyText.fontSize = quote.FontSize != 0 ? quote.FontSize : defaultTextStyle.FontSize;
+        _bodyText.color = quote.TextColor ?? defaultTextStyle.TextColor;
+    }
+
+    private IEnumerator TextAppearingAnimationCoroutine()
+    {
+        _bodyText.ForceMeshUpdate();
+
+        TMP_TextInfo textInfo = _bodyText.textInfo;
+
+        int totalVisibleCharacters = textInfo.characterCount;
+        int totalWordCount = textInfo.wordCount;
+        int visibleCount = 0;
+        int currentWord = 0;
+
+        _isTextAnimating = true;
+
+        if (textAppearingSpeed == 0)
+        {
+            _isTextAnimating = false;
+            yield break;
+        }
+
+        switch (textAppearingAnimation)
+        {
+            case TextAppearingAnimation.None:
+                _isTextAnimating = false;
+                yield break;
+
+            case TextAppearingAnimation.LetterByLetter:
+                while (true)
+                {
+                    if (visibleCount >= totalVisibleCharacters)
+                    {
+                        _isTextAnimating = false;
+                        yield break;
+                    }
+
+                    _bodyText.maxVisibleCharacters = visibleCount; // How many characters should TextMeshPro display?
+
+                    visibleCount++;
+
+                    yield return new WaitForSeconds(1 / textAppearingSpeed);
+                }
+
+            case TextAppearingAnimation.WordByWord:
+                while (true)
+                {
+                    // Get last character index for the current word.
+                    if (currentWord == 0) // Display no words.
+                        visibleCount = 0;
+                    else if (currentWord < totalWordCount) // Display all other words with the exception of the last one.
+                        visibleCount = textInfo.wordInfo[currentWord - 1].lastCharacterIndex + 1;
+                    else if (currentWord == totalWordCount) // Display last word and all remaining characters.
+                        visibleCount = totalVisibleCharacters;
+
+                    _bodyText.maxVisibleCharacters = visibleCount; // How many characters should TextMeshPro display?
+
+                    // Once the last character has been revealed, wait 1.0 second and start over.
+                    if (visibleCount >= totalVisibleCharacters)
+                    {
+                        _isTextAnimating = false;
+                        yield break;
+                    }
+
+                    currentWord++;
+
+                    yield return new WaitForSeconds(1 / textAppearingSpeed);
+                }
+        }
+    }
+
+    private void StopTextAppearingAnimation()
+    {
+        StopCoroutine(TextAppearingAnimationCoroutine());
+        _isTextAnimating = false;
+        _bodyText.maxVisibleCharacters = _bodyText.textInfo.characterCount;
     }
 
     [ContextMenu("RT")]
