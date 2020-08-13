@@ -11,9 +11,8 @@ public class Quote
     [SerializeField] private DialogCharacter _character = null;
     [SerializeField] private TMP_FontAsset _font = null;
     [SerializeField] private int _fontSize = 0;
-    // [SerializeField] private GameObject choiceButton = null;
 
-    public string CharacterName
+    public string CharacterName 
     {
         get
         {
@@ -23,8 +22,8 @@ public class Quote
             return _characterName;
         }
     }
-    public string Text { get => _text; }
-    public Sprite FaceIcon
+    public string Text => _text;
+    public Sprite FaceIcon 
     {
         get
         {
@@ -33,7 +32,7 @@ public class Quote
             return _faceIcon;
         }
     }
-    public TMP_FontAsset Font
+    public TMP_FontAsset Font 
     {
         get
         {
@@ -41,9 +40,8 @@ public class Quote
                 return _character.Font;
             return _font;
         }
-    }
-    
-    public Color? TextColor
+    }    
+    public Color? TextColor 
     {
         get
         {
@@ -52,7 +50,6 @@ public class Quote
             return null;
         }
     }
-
     public int FontSize { get
         {
             if (_character != null && _character.FontSize != 0)

@@ -9,9 +9,9 @@ public abstract class Effect : ScriptableObject
     [SerializeField] private string _description;
     [SerializeField] private Sprite _sprite;
 
-    public string EffectName { get => _effectName; }
-    public string Description { get => _description; }
-    public Sprite Sprite { get => _sprite; }
+    public string EffectName => _effectName;
+    public string Description => _description;
+    public Sprite Sprite => _sprite;
 
     public abstract void Apply();
 }

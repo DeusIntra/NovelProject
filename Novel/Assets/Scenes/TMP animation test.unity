@@ -224,10 +224,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 903851853}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b825de51c295364095078738b5b226d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7770430c60c50bb4b9303a0ca1991ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1323375484}
+  apply: 1
+  jitterRange: 5
+  _textComponent: {fileID: 1323375484}
 --- !u!4 &903851855
 Transform:
   m_ObjectHideFlags: 0

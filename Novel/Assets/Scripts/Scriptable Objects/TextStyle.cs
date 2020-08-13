@@ -10,7 +10,7 @@ public class TextStyle : ScriptableObject
     [SerializeField] private TMP_FontAsset _font;
     [SerializeField] private int _fontSize;
 
-    public Color TextColor { get => _textColor; }
-    public TMP_FontAsset Font { get => _font; }
-    public int FontSize { get => _fontSize; }
+    public Color TextColor => _textColor;
+    public TMP_FontAsset Font => _font;
+    public int FontSize => _fontSize;
 }

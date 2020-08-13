@@ -9,9 +9,9 @@ public abstract class Spell : ScriptableObject
     [SerializeField] private string _description;
     [SerializeField] private Sprite _icon;
 
-    public string Spellname { get => _spellName; }
-    public string Description { get => _description; }
-    public Sprite Icon { get => _icon; }
+    public string Spellname => _spellName;
+    public string Description => _description;
+    public Sprite Icon => _icon;
 
     public abstract void Cast();
 }

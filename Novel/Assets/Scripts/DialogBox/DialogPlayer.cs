@@ -8,6 +8,7 @@ public class DialogPlayer : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _bodyText = null;
     [SerializeField] private TextAnimationHolder _textAnimHolder = null;
+    [SerializeField] private TextEffectHolder _textEffectHolder = null;
     [SerializeField] private DialogBoxAnimationHolder _dialogAnimHolder = null;
 
     private ITextAnimation _textAnimation;
@@ -41,6 +42,10 @@ public class DialogPlayer : MonoBehaviour
             _textAnimation.StopAnimation();
             return;
         }
+        else
+        {
+            _textEffectHolder.TerminateAll();
+        }
 
         if (_currentNode is null)
         {
@@ -72,6 +77,7 @@ public class DialogPlayer : MonoBehaviour
         _dialogVisualizer.SetText(quote);
 
         _textAnimation.Animate(_bodyText, animationSpeed);
+        _textEffectHolder.ApplyAll(_bodyText);
     }
 
     // used for choice buttons

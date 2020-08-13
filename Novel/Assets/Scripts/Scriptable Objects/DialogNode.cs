@@ -15,9 +15,9 @@ public class DialogNode : ScriptableObject
         [SerializeField] private DialogNode _nextNode = null;
         [SerializeField] private GameEvent _onChoice = null;
 
-        public string Text { get => _text; }
-        public DialogNode NextNode { get => _nextNode; }
-        public GameEvent OnChoice { get => _onChoice; }
+        public string Text => _text;
+        public DialogNode NextNode => _nextNode;
+        public GameEvent OnChoice => _onChoice;
     }
 
     #endregion
@@ -30,10 +30,10 @@ public class DialogNode : ScriptableObject
     [SerializeField] private DialogNode _nextNode = null;
     [SerializeField] private GameEvent _onEndNode = null;
 
-    public List<Quote> Quotes { get => _quotes; }
-    public List<Choice> Choices { get => _choices; }
-    public Quote CurrentQuote { get => _quotes[_currentQuoteIndex]; }
-    public DialogNode NextNode { get => _nextNode; }
+    public List<Quote> Quotes => _quotes;
+    public List<Choice> Choices => _choices;
+    public Quote CurrentQuote => _quotes[_currentQuoteIndex];
+    public DialogNode NextNode => _nextNode;
 
     private int _currentQuoteIndex;
 

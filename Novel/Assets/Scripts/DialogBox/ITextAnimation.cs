@@ -1,5 +1,8 @@
 ﻿using TMPro;
 
+/// <summary>
+/// Text animations apply when text appears
+/// </summary>
 public interface ITextAnimation
 {
     bool isAnimating();

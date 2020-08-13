@@ -11,11 +11,11 @@ public abstract class Item : ScriptableObject
     [SerializeField] int _buyPrice;
     [SerializeField] int _sellPrice;
 
-    public string ItemName { get => _itemName; }
-    public string Description { get => _description; }
-    public Sprite Icon { get => _icon; }
-    public int BuyPrice { get => _buyPrice; }
-    public int SellPrice { get => _sellPrice; }
+    public string ItemName => _itemName;
+    public string Description => _description;
+    public Sprite Icon => _icon;
+    public int BuyPrice => _buyPrice;
+    public int SellPrice => _sellPrice;
 
     public abstract void Use();
 }

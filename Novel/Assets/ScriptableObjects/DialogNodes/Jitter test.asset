@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29a0c11aa7f05b4bb6b9c3fe0af3650, type: 3}
+  m_Name: Jitter test
+  m_EditorClassIdentifier: 
+  _quotes:
+  - _characterName: 
+    _text: Oh man, I would <link=jitter>KILL</link> for an ice-cream.
+    _faceIcon: {fileID: 0}
+    _character: {fileID: 0}
+    _font: {fileID: 0}
+    _fontSize: 0
+  _nodeFont: {fileID: 0}
+  _choices: []
+  _nextNode: {fileID: 11400000}
+  _onEndNode: {fileID: 0}

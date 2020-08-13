@@ -10,8 +10,8 @@ public class Character : ScriptableObject
     [SerializeField] private float _age;
     [SerializeField] private string _sex;
 
-    public string CharacterName { get => _characterName; }
-    public Sprite FaceIcon { get => _faceIcon; }
-    public float Age { get => _age; }
-    public string Sex { get => _sex; }
+    public string CharacterName => _characterName;
+    public Sprite FaceIcon => _faceIcon;
+    public float Age => _age;
+    public string Sex => _sex;
 }
