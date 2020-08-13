@@ -11,6 +11,7 @@ public class Quote
     [SerializeField] private DialogCharacter _character = null;
     [SerializeField] private TMP_FontAsset _font = null;
     [SerializeField] private int _fontSize = 0;
+    // [SerializeField] private GameObject choiceButton = null;
 
     public string CharacterName
     {

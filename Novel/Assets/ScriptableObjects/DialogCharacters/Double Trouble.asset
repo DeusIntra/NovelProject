@@ -16,5 +16,5 @@ MonoBehaviour:
   _faceIcon: {fileID: 21300000, guid: 6790892d656296e488158326a3022c3e, type: 3}
   _font: {fileID: 0}
   _fontSize: 0
-  _useFontColor: 0
+  _useFontColor: 1
   _fontColor: {r: 0.6431373, g: 0.7568628, b: 0.6862745, a: 1}

@@ -25,9 +25,7 @@ public class DialogBox : MonoBehaviour
     // choice opening animation
     // choice closing animation
         
-    [Space]
     [Header("Child GameObjects")]
-
     [SerializeField] private GameObject _body = null;
     [SerializeField] private GameObject _nameBox = null;
     [SerializeField] private GameObject _faceIconObject = null;
@@ -43,6 +41,7 @@ public class DialogBox : MonoBehaviour
     private List<DialogNode.Choice> _choices;
     private DialogNode _currentNode;
     private bool _isTextAnimating;
+    private Coroutine _textCoroutine;
 
     #endregion
 
@@ -57,12 +56,23 @@ public class DialogBox : MonoBehaviour
         _faceIconRectTransform = _faceIconObject.GetComponent<RectTransform>();
         _choices = new List<DialogNode.Choice>();
         _currentNode = null;
+        _textCoroutine = null;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Debug.Log("LShift");
+            StopCoroutine(_textCoroutine);
+        }
     }
 
     #endregion
 
     #region Public methods
 
+    #region Open / Close
     public void Open()
     {
         gameObject.SetActive(true);
@@ -72,6 +82,7 @@ public class DialogBox : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+    #endregion
 
     public void StartDialog(DialogNode firstNode = null)
     {
@@ -80,9 +91,15 @@ public class DialogBox : MonoBehaviour
         PlayDialog();
     }
 
-    // Used for "Next" button
+    // used for "Next" button
     public void PlayDialog()
     {
+        if (_isTextAnimating)
+        {
+            StopTextAppearingAnimation();
+            return;
+        }
+
         if (_currentNode == null) // should close dialog box if null
         {
             Close();
@@ -110,12 +127,6 @@ public class DialogBox : MonoBehaviour
             return;
         }
 
-        if (_isTextAnimating)
-        {
-            StopTextAppearingAnimation();
-            return;
-        }
-
         ShowFaceIcon(quote);
         SetFontAndColor(quote);
 
@@ -123,9 +134,21 @@ public class DialogBox : MonoBehaviour
         _nameText.text = quote.CharacterName;
         _bodyText.text = quote.Text;
 
-        StartCoroutine(TextAppearingAnimationCoroutine());
+        switch (textAppearingAnimation)
+        {
+            case TextAppearingAnimation.None:
+                _isTextAnimating = false;
+                break;
+            case TextAppearingAnimation.LetterByLetter:
+                _textCoroutine = StartCoroutine(LetterAnimationCoroutine());
+                break;
+            case TextAppearingAnimation.WordByWord:
+                _textCoroutine = StartCoroutine(WordAnimationCoroutine());
+                break;
+        }
     }
 
+    // used for choice buttons
     public void SetNode(DialogNode nextNode)
     {
         _currentNode = nextNode;
@@ -233,7 +256,41 @@ public class DialogBox : MonoBehaviour
         _bodyText.color = quote.TextColor ?? defaultTextStyle.TextColor;
     }
 
-    private IEnumerator TextAppearingAnimationCoroutine()
+    private IEnumerator LetterAnimationCoroutine()
+    {
+        _bodyText.ForceMeshUpdate();
+
+        TMP_TextInfo textInfo = _bodyText.textInfo;
+
+        int totalVisibleCharacters = textInfo.characterCount;
+        int visibleCount = 0;
+
+        _isTextAnimating = true;
+
+        if (textAppearingSpeed == 0)
+        {
+            _isTextAnimating = false;
+            yield break;
+        }
+
+        while (true)
+        {
+            if (visibleCount > totalVisibleCharacters)
+            {
+                _isTextAnimating = false;
+                yield break;
+            }
+
+            _bodyText.maxVisibleCharacters = visibleCount;
+
+            visibleCount++;
+
+            yield return new WaitForSeconds(1 / textAppearingSpeed);
+        }
+        
+    }
+
+    private IEnumerator WordAnimationCoroutine()
     {
         _bodyText.ForceMeshUpdate();
 
@@ -252,58 +309,32 @@ public class DialogBox : MonoBehaviour
             yield break;
         }
 
-        switch (textAppearingAnimation)
+        while (true)
         {
-            case TextAppearingAnimation.None:
+            if (currentWord == 0)
+                visibleCount = 0;
+            else if (currentWord < totalWordCount)
+                visibleCount = textInfo.wordInfo[currentWord - 1].lastCharacterIndex + 1;
+            else if (currentWord == totalWordCount)
+                visibleCount = totalVisibleCharacters;
+
+            _bodyText.maxVisibleCharacters = visibleCount;
+
+            if (visibleCount >= totalVisibleCharacters)
+            {
                 _isTextAnimating = false;
                 yield break;
+            }
 
-            case TextAppearingAnimation.LetterByLetter:
-                while (true)
-                {
-                    if (visibleCount >= totalVisibleCharacters)
-                    {
-                        _isTextAnimating = false;
-                        yield break;
-                    }
+            currentWord++;
 
-                    _bodyText.maxVisibleCharacters = visibleCount; // How many characters should TextMeshPro display?
-
-                    visibleCount++;
-
-                    yield return new WaitForSeconds(1 / textAppearingSpeed);
-                }
-
-            case TextAppearingAnimation.WordByWord:
-                while (true)
-                {
-                    // Get last character index for the current word.
-                    if (currentWord == 0) // Display no words.
-                        visibleCount = 0;
-                    else if (currentWord < totalWordCount) // Display all other words with the exception of the last one.
-                        visibleCount = textInfo.wordInfo[currentWord - 1].lastCharacterIndex + 1;
-                    else if (currentWord == totalWordCount) // Display last word and all remaining characters.
-                        visibleCount = totalVisibleCharacters;
-
-                    _bodyText.maxVisibleCharacters = visibleCount; // How many characters should TextMeshPro display?
-
-                    // Once the last character has been revealed, wait 1.0 second and start over.
-                    if (visibleCount >= totalVisibleCharacters)
-                    {
-                        _isTextAnimating = false;
-                        yield break;
-                    }
-
-                    currentWord++;
-
-                    yield return new WaitForSeconds(1 / textAppearingSpeed);
-                }
+            yield return new WaitForSeconds(1 / textAppearingSpeed);
         }
     }
 
     private void StopTextAppearingAnimation()
     {
-        StopCoroutine(TextAppearingAnimationCoroutine());
+        StopCoroutine(_textCoroutine);
         _isTextAnimating = false;
         _bodyText.maxVisibleCharacters = _bodyText.textInfo.characterCount;
     }

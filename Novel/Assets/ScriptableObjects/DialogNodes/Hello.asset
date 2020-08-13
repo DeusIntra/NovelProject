@@ -20,7 +20,7 @@ MonoBehaviour:
     _font: {fileID: 0}
     _fontSize: 0
   - _characterName: Lorem
-    _text: Me name is Lorem
+    _text: My name is Lorem.
     _faceIcon: {fileID: 0}
     _character: {fileID: 0}
     _font: {fileID: 0}
