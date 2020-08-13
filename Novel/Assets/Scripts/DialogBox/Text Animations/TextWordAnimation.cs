@@ -33,6 +33,7 @@ public class TextWordAnimation : MonoBehaviour, ITextAnimation
         _text.ForceMeshUpdate();
 
         TMP_TextInfo textInfo = _text.textInfo;
+        TMP_WordInfo[] wordInfo = textInfo.wordInfo;
 
         int totalVisibleCharacters = textInfo.characterCount;
         int totalWordCount = textInfo.wordCount;
@@ -45,6 +46,28 @@ public class TextWordAnimation : MonoBehaviour, ITextAnimation
         {
             _isAnimating = false;
             yield break;
+        }
+
+        TMP_LinkInfo[] links = textInfo.linkInfo;
+        if (links.Length > 0)
+        {
+            for (int i = 0; i < links.Length; i++)
+            {
+                if (links[i].GetLinkID() == "start from")
+                {
+                    int firstIndex = links[i].linkTextfirstCharacterIndex;
+                    
+                    for (int j = 0; j < totalWordCount; j++)
+                    {
+                        if (wordInfo[j].firstCharacterIndex >= firstIndex)
+                        {
+                            currentWord = j;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
         }
 
         while (true)

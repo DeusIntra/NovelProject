@@ -11,7 +11,6 @@ public class JitterTextAnimation : MonoBehaviour
         _textComponent = GetComponent<TMP_Text>();
     }
 
-
     private void Update()
     {
         _textComponent.ForceMeshUpdate();

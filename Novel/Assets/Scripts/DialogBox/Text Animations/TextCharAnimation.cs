@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-public class TextLetterAnimation : MonoBehaviour, ITextAnimation
+public class TextCharAnimation : MonoBehaviour, ITextAnimation
 {
     private bool _isAnimating;
     private TMP_Text _text;
@@ -43,6 +43,19 @@ public class TextLetterAnimation : MonoBehaviour, ITextAnimation
         {
             _isAnimating = false;
             yield break;
+        }
+
+        TMP_LinkInfo[] links = textInfo.linkInfo;
+        if (links.Length > 0)
+        {
+            for (int i = 0; i < links.Length; i++)
+            {
+                if (links[i].GetLinkID() == "start from")
+                {
+                    visibleCount = links[i].linkTextfirstCharacterIndex;
+                    break;
+                }
+            }
         }
 
         while (true)
