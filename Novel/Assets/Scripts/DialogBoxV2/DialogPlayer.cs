@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(DialogVisualizer))]
 public class DialogPlayer : MonoBehaviour
 {
-    public float animationSpeed = 5;
+    public float animationSpeed = 15;
 
     [SerializeField] private TextMeshProUGUI _bodyText = null;
     [SerializeField] private TextAnimationHolder _textAnimHolder = null;
