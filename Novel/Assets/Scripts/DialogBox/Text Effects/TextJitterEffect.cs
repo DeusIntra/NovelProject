@@ -1,20 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using TMPro;
 using UnityEngine;
 
 public class TextJitterEffect : MonoBehaviour, ITextEffect
 {
     public bool use = true;
-    public float jitterRange = 5;
+    public float jitterRange = 2.5f;
 
     private TMP_Text _text;
     private TMP_TextInfo _textInfo;
     private TMP_CharacterInfo[] _charInfo;
     private List<TMP_LinkInfo> _links;
     private Coroutine _coroutine;
-    private Vector3[][] _originalVertices;
     private TMP_MeshInfo[] _cachedMeshInfo;
 
     public void Apply(TMP_Text text)
@@ -69,18 +67,15 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
                     float jitterX = Random.Range(0f, jitterRange) - jitterRange / 2;
                     float jitterY = Random.Range(0f, jitterRange) - jitterRange / 2;
 
-                    // everything up to this point works fine
-                    // how tf do i make this work
-
                     int charMaterialIndex = _charInfo[i].materialReferenceIndex;
                     TMP_MeshInfo meshInfo = _textInfo.meshInfo[charMaterialIndex];
                     Vector3[] charVerts = meshInfo.vertices;
 
-                    int firstVertexIndex = _charInfo[i].vertexIndex;
+                    int vertexIndex = _charInfo[i].vertexIndex;
                     for (int j = 0; j < 4; j++)
                     {
-                        Vector3 original = _originalVertices[i][j];
-                        charVerts[firstVertexIndex + j] = original + new Vector3(jitterX, jitterY, 0);
+                        Vector3 original = _cachedMeshInfo[charMaterialIndex].vertices[vertexIndex + j];
+                        charVerts[vertexIndex + j] = original + new Vector3(jitterX, jitterY, 0);
                     }
                 }
                 for (int i = 0; i < _textInfo.meshInfo.Length; i++)
@@ -97,31 +92,25 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
 
     private void ResetVertices()
     {
+        for (int i = 0; i < _textInfo.characterCount; i++)
+        {
+            int charMaterialIndex = _charInfo[i].materialReferenceIndex;
+            TMP_MeshInfo meshInfo = _textInfo.meshInfo[charMaterialIndex];
+            Vector3[] charVerts = meshInfo.vertices;
+            int vertexIndex = _charInfo[i].vertexIndex;
+            for (int j = 0; j < 4; j++)
+            {
+                Vector3 original = _cachedMeshInfo[charMaterialIndex].vertices[vertexIndex + j];
+                charVerts[vertexIndex + j] = original;
+            }
+        }
 
+        for (int i = 0; i < _textInfo.meshInfo.Length; i++)
+        {
+            var meshInfo = _textInfo.meshInfo[i];
+            meshInfo.mesh.vertices = meshInfo.vertices;
 
-        //TMP_CharacterInfo[] charInfo = _textInfo.characterInfo;
-
-        //foreach (TMP_LinkInfo linkInfo in _links)
-        //{
-        //    int firstIndex = linkInfo.linkTextfirstCharacterIndex;
-        //    int lastIndex = linkInfo.linkTextLength + firstIndex;
-
-        //    for (int i = firstIndex; i < lastIndex; i++)
-        //    {
-        //        int charMaterialIndex = charInfo[i].materialReferenceIndex;
-        //        TMP_MeshInfo charMeshInfo = _textInfo.meshInfo[charMaterialIndex];
-        //        Vector3[] charVerts = charMeshInfo.vertices;
-
-        //        //for (int j = 0; j < 4; j++)
-        //        //{
-        //        //    int firstVertexIndex = charInfo[i].vertexIndex;
-        //        //    Vector3 original = charVerts[firstVertexIndex + j];
-        //        //    charVerts[firstVertexIndex + j] = original;
-        //        //}
-        //        charMeshInfo.mesh.vertices = charVerts; //charMeshInfo.vertices;
-
-        //        _text.UpdateGeometry(charMeshInfo.mesh, i);
-        //    }
-        //}
+            _text.UpdateGeometry(meshInfo.mesh, i);
+        }
     }
 }

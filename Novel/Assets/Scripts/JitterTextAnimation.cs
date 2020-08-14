@@ -16,26 +16,31 @@ public class JitterTextAnimation : MonoBehaviour
     {
         if (apply)
         {
-            _textComponent.ForceMeshUpdate();
-            TMP_TextInfo textInfo = _textComponent.textInfo;
-            TMP_CharacterInfo charInfo = textInfo.characterInfo[0];
-            int charMaterialIndex = charInfo.materialReferenceIndex;
-            TMP_MeshInfo charMeshInfo = textInfo.meshInfo[charMaterialIndex];
-            Vector3[] charVerts = charMeshInfo.vertices;
-
-            float jitterX = Random.Range(0f, jitterRange) - jitterRange / 2;
-            float jitterY = Random.Range(0f, jitterRange) - jitterRange / 2;
-
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < _textComponent.textInfo.characterCount; i++)
             {
-                int firstVertexIndex = charInfo.vertexIndex;
-                Vector3 original = charVerts[firstVertexIndex + i];
-                charVerts[firstVertexIndex + i] = original + new Vector3(jitterX, jitterY, 0);
+                _textComponent.ForceMeshUpdate();
+                TMP_TextInfo textInfo = _textComponent.textInfo;
+                TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
+                int charMaterialIndex = charInfo.materialReferenceIndex;
+                TMP_MeshInfo charMeshInfo = textInfo.meshInfo[charMaterialIndex];
+                Vector3[] charVerts = charMeshInfo.vertices;
+
+                float jitterX = Random.Range(0f, jitterRange) - jitterRange / 2;
+                float jitterY = Random.Range(0f, jitterRange) - jitterRange / 2;
+
+                for (int j = 0; j < 4; j++)
+                {
+                    int firstVertexIndex = charInfo.vertexIndex;
+                    Vector3 original = charVerts[firstVertexIndex + j];
+                    charVerts[firstVertexIndex + j] = original + new Vector3(jitterX, jitterY, 0);
+                }
             }
 
-            charMeshInfo.mesh.vertices = charMeshInfo.vertices;
-
-            _textComponent.UpdateGeometry(charMeshInfo.mesh, 0);
+            for (int i = 0; i < _textComponent.textInfo.meshInfo.Length; i++)
+            {
+                _textComponent.textInfo.meshInfo[i].mesh.vertices = _textComponent.textInfo.meshInfo[i].vertices;
+                _textComponent.UpdateGeometry(_textComponent.textInfo.meshInfo[i].mesh, i);
+            }
         }
     }
 }
