@@ -6,7 +6,7 @@ using UnityEditor;
 public class TextAnimationHolderEditor : Editor
 {
     private SerializedProperty animationIndex;
-    private int selected = 0;
+    private int selected;
 
     private void OnEnable()
     {
@@ -19,8 +19,8 @@ public class TextAnimationHolderEditor : Editor
 
         TextAnimationHolder script = (TextAnimationHolder)target;
         string[] animationNames = script.AnimationNames;
-        selected = EditorGUILayout.Popup("CurrentAnimation", selected, animationNames);
-        script.animationIndex = selected;
+        animationIndex.intValue = EditorGUILayout.Popup("CurrentAnimation", animationIndex.intValue, animationNames);
+
         serializedObject.ApplyModifiedProperties();
 
         GUI.enabled = false;

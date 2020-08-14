@@ -10,7 +10,7 @@ public class TextVerticalCurveEffect : MonoBehaviour, ITextEffect
     public bool use = true;
     public string linkID = "curve";
     public float amplitude = 2f;
-    public float speed = 2f;
+    public float speed = 0.02f;
     public float charDifference = 0.3f;
     public AnimationCurve curve;
 
@@ -64,7 +64,7 @@ public class TextVerticalCurveEffect : MonoBehaviour, ITextEffect
     {
         while (true)
         {
-            _time += Time.deltaTime * speed;
+            _time += speed;
 
             foreach (TMP_LinkInfo linkInfo in _links)
             {
