@@ -5,9 +5,10 @@ using Novella.Dialog;
 
 public class TextWordAnimation : MonoBehaviour, ITextAnimation
 {
+    public float wordsPerSecond = 5f;
+
     private bool _isAnimating;
     private TMP_Text _text;
-    private float _speed;
     private Coroutine _coroutine;
 
     public bool isAnimating()
@@ -15,10 +16,9 @@ public class TextWordAnimation : MonoBehaviour, ITextAnimation
         return _isAnimating;
     }
 
-    public void Animate(TMP_Text text, float speed)
+    public void Animate(TMP_Text text)
     {
         _text = text;
-        _speed = speed;
         _coroutine = StartCoroutine(AnimationCoroutine());
     }
 
@@ -43,7 +43,7 @@ public class TextWordAnimation : MonoBehaviour, ITextAnimation
 
         _isAnimating = true;
 
-        if (_speed == 0)
+        if (wordsPerSecond == 0)
         {
             _isAnimating = false;
             yield break;
@@ -90,7 +90,7 @@ public class TextWordAnimation : MonoBehaviour, ITextAnimation
 
             currentWord++;
 
-            yield return new WaitForSeconds(1 / _speed);
+            yield return new WaitForSeconds(1 / wordsPerSecond);
         }
     }
 }

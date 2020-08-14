@@ -3,12 +3,11 @@ using UnityEngine;
 
 namespace Novella.Dialog
 {
-
     [RequireComponent(typeof(DialogVisualizer))]
     public class DialogPlayer : MonoBehaviour
     {
-        public float animationSpeed = 15;
-
+        [SerializeField] private Novella.GameEvent _onDialogPlay = null;
+        [SerializeField] private Novella.GameEvent _onDialogClose = null;
         [SerializeField] private TextMeshProUGUI _bodyText = null;
         [SerializeField] private TextAnimationHolder _textAnimHolder = null;
         [SerializeField] private TextEffectHolder _textEffectHolder = null;
@@ -35,12 +34,13 @@ namespace Novella.Dialog
 
         public void PlayDialog()
         {
+            #region initial checks
             if (_dialogBoxAnimation.isAnimating())
             {
                 return;
             }
 
-            if (_textAnimation.isAnimating())
+            if (_textAnimation != null && _textAnimation.isAnimating())
             {
                 _textAnimation.StopAnimation();
                 return;
@@ -52,8 +52,11 @@ namespace Novella.Dialog
 
             if (_currentNode is null)
             {
+                _onDialogClose.Raise();
                 _dialogBoxAnimation.Close(gameObject);
+                return;
             }
+            #endregion
 
             Quote quote = _currentNode.NextQuote();
 
@@ -79,7 +82,9 @@ namespace Novella.Dialog
             _dialogVisualizer.SetTextStyle(quote);
             _dialogVisualizer.SetText(quote);
 
-            _textAnimation.Animate(_bodyText, animationSpeed);
+            _onDialogPlay.Raise();
+
+            if (_textAnimation != null) _textAnimation.Animate(_bodyText);
             _textEffectHolder.ApplyAll(_bodyText);
         }
 

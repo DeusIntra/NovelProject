@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815c9a0ac23f01547b53d26a926a5ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationIndex: 1
+  animationIndex: 0
 --- !u!114 &5721539897193398546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a5e446c0d35654fa755c127cdd1bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charsPerSecond: 15
 --- !u!114 &5721539897193398551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b9081e9010d93740b539351f8821d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wordsPerSecond: 5
 --- !u!1 &5721539897324327692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1200,7 +1202,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dacfaa3f2550bc64f9af1b1a3b651732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationSpeed: 15
+  _onDialogPlay: {fileID: 11400000, guid: c0c508c07c93e3d4abf228d28dd839c2, type: 2}
+  _onDialogClose: {fileID: 11400000, guid: 079ce187cd5d7bd429d4ecb37e7d7a53, type: 2}
   _bodyText: {fileID: 6161619345858814491}
   _textAnimHolder: {fileID: 5721539897193398545}
   _textEffectHolder: {fileID: 437255129944402622}

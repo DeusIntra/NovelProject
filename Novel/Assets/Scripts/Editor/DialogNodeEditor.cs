@@ -38,12 +38,12 @@ public class DialogNodeEditor : Editor
 
         EditorGUILayout.Space();
 
-        EditorGUILayout.HelpBox(new GUIContent(
+        EditorGUILayout.HelpBox(
             "Next\u00A0Node field will only be active if Choices size is\u00A00. " +
             "If Choices size is not\u00A00, Dialog\u00A0Node will ignore " +
             "its Next\u00A0Node and use Choice's. Next\u00A0Node may be useful " +
             "to set up an event which occurs while dialog is still playing or " +
-            "for a logical separation of the dialog."));
+            "for a logical separation of the dialog.", MessageType.Info);
 
         EditorGUI.BeginDisabledGroup(_choicesProperty.arraySize > 0);
         EditorGUILayout.PropertyField(_nextNodeProperty);

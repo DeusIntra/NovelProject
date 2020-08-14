@@ -4,7 +4,7 @@ namespace Novella.Dialog
 {
     public class TextAnimationHolder : MonoBehaviour
     {
-        public int animationIndex = 0;
+        [HideInInspector] public int animationIndex = 0;
 
         private ITextAnimation[] _textAnimations = null;
 
@@ -18,9 +18,24 @@ namespace Novella.Dialog
             }
         }
 
+        public string[] AnimationNames // used for custom editor
+        {
+            get
+            {
+                ITextAnimation[] animations = GetComponents<ITextAnimation>();
+                string[] animationNames = new string[animations.Length];
+                for (int i = 0; i < animations.Length; i++)
+                {
+                    animationNames[i] = animations[i].GetType().Name;
+                }
+                return animationNames;
+            }
+        }
+
         private void Awake()
         {
             _textAnimations = GetComponents<ITextAnimation>();
         }
+
     }
 }

@@ -9,7 +9,7 @@ public class TextNoAnimation : MonoBehaviour, ITextAnimation
         return false;
     }
 
-    public void Animate(TMP_Text text, float speed)
+    public void Animate(TMP_Text text)
     {
         return;
     }
