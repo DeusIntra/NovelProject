@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
+using Novella.Dialog;
 
 [CustomEditor(typeof(DialogNode))]
 public class DialogNodeEditor : Editor

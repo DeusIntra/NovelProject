@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using Novella.Dialog;
 
 public class TextNoAnimation : MonoBehaviour, ITextAnimation
 {

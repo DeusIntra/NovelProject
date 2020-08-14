@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using Novella.Dialog;
 
 public class TextWordAnimation : MonoBehaviour, ITextAnimation
 {

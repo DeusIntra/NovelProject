@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Novella.Dialog;
 
 public class DialogNoAnimation : MonoBehaviour, IDialogBoxAnimation
 {
