@@ -1,26 +1,29 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Game Event", menuName = "Scriptable Object/Game Event", order = 52)]
-public class GameEvent : ScriptableObject
+namespace Novella
 {
-    private List<GameEventListener> listeners = new List<GameEventListener>();
-
-    public void Raise()
+    [CreateAssetMenu(fileName = "New Game Event", menuName = "Scriptable Object/Game Event", order = 52)]
+    public class GameEvent : ScriptableObject
     {
-        for (int i = listeners.Count - 1; i >= 0; i--)
+        private List<GameEventListener> listeners = new List<GameEventListener>();
+
+        public void Raise()
         {
-            listeners[i].OnEventRaised();
+            for (int i = listeners.Count - 1; i >= 0; i--)
+            {
+                listeners[i].OnEventRaised();
+            }
         }
-    }
 
-    public void RegisterListener(GameEventListener listener)
-    {
-        listeners.Add(listener);
-    }
+        public void RegisterListener(GameEventListener listener)
+        {
+            listeners.Add(listener);
+        }
 
-    public void UnregisterListener(GameEventListener listener)
-    {
-        listeners.Remove(listener);
+        public void UnregisterListener(GameEventListener listener)
+        {
+            listeners.Remove(listener);
+        }
     }
 }

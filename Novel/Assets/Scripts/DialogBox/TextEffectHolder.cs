@@ -1,28 +1,31 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class TextEffectHolder : MonoBehaviour
+namespace Novella.Dialog
 {
-    private ITextEffect[] _textEffects = null;
-
-    private void Awake()
+    public class TextEffectHolder : MonoBehaviour
     {
-        _textEffects = GetComponents<ITextEffect>();
-    }
+        private ITextEffect[] _textEffects = null;
 
-    public void ApplyAll(TMP_Text text)
-    {
-        foreach (var effect in _textEffects)
+        private void Awake()
         {
-            effect.Apply(text);
+            _textEffects = GetComponents<ITextEffect>();
         }
-    }
 
-    public void TerminateAll()
-    {
-        foreach (var effect in _textEffects)
+        public void ApplyAll(TMP_Text text)
         {
-            effect.Terminate();
+            foreach (var effect in _textEffects)
+            {
+                effect.Apply(text);
+            }
+        }
+
+        public void TerminateAll()
+        {
+            foreach (var effect in _textEffects)
+            {
+                effect.Terminate();
+            }
         }
     }
 }

@@ -2,59 +2,64 @@
 using TMPro;
 using UnityEngine;
 
-[Serializable]
-public class Quote
+namespace Novella.Dialog
 {
-    [SerializeField] private string _characterName = null;
-    [SerializeField] [TextArea] private string _text = null;
-    [SerializeField] private Sprite _faceIcon = null;
-    [SerializeField] private DialogCharacter _character = null;
-    [SerializeField] private TMP_FontAsset _font = null;
-    [SerializeField] private int _fontSize = 0;
+    [Serializable]
+    public class Quote
+    {
+        [SerializeField] private string _characterName = null;
+        [SerializeField] [TextArea] private string _text = null;
+        [SerializeField] private Sprite _faceIcon = null;
+        [SerializeField] private DialogCharacter _character = null;
+        [SerializeField] private TMP_FontAsset _font = null;
+        [SerializeField] private int _fontSize = 0;
 
-    public string CharacterName 
-    {
-        get
+        public string CharacterName
         {
-            if (_character != null && (_characterName == ""))
-                return _character.name;
+            get
+            {
+                if (_character != null && (_characterName == ""))
+                    return _character.name;
 
-            return _characterName;
+                return _characterName;
+            }
         }
-    }
-    public string Text => _text;
-    public Sprite FaceIcon 
-    {
-        get
+        public string Text => _text;
+        public Sprite FaceIcon
         {
-            if (_character != null && _faceIcon == null)
-                return _character.FaceIcon;
-            return _faceIcon;
+            get
+            {
+                if (_character != null && _faceIcon == null)
+                    return _character.FaceIcon;
+                return _faceIcon;
+            }
         }
-    }
-    public TMP_FontAsset Font 
-    {
-        get
+        public TMP_FontAsset Font
         {
-            if (_character != null && _font == null)
-                return _character.Font;
-            return _font;
+            get
+            {
+                if (_character != null && _font == null)
+                    return _character.Font;
+                return _font;
+            }
         }
-    }    
-    public Color? TextColor 
-    {
-        get
+        public Color? TextColor
         {
-            if (_character != null && _character.UseTextColor)
-                return _character.TextColor;
-            return null;
+            get
+            {
+                if (_character != null && _character.UseTextColor)
+                    return _character.TextColor;
+                return null;
+            }
         }
-    }
-    public int FontSize { get
+        public int FontSize
         {
-            if (_character != null && _character.FontSize != 0)
-                return _character.FontSize;
-            return _fontSize;                
+            get
+            {
+                if (_character != null && _character.FontSize != 0)
+                    return _character.FontSize;
+                return _fontSize;
+            }
         }
     }
 }

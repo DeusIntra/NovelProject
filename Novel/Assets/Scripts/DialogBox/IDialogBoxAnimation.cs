@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 
-public interface IDialogBoxAnimation
+namespace Novella.Dialog
 {
-    bool isAnimating();
-    void Open(GameObject gameObject);
-    void Close(GameObject gameObject);
+    public interface IDialogBoxAnimation
+    {
+        bool isAnimating();
+        void Open(GameObject gameObject);
+        void Close(GameObject gameObject);
+    }
 }

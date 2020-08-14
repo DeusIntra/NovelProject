@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
 
-public class DialogBoxAnimationHolder : MonoBehaviour
+namespace Novella.Dialog
 {
-    public int animationIndex = 0;
-
-    private IDialogBoxAnimation[] _dialogAnimations = null;
-
-    public IDialogBoxAnimation CurrentAnimation 
+    public class DialogBoxAnimationHolder : MonoBehaviour
     {
-        get
+        public int animationIndex = 0;
+
+        private IDialogBoxAnimation[] _dialogAnimations = null;
+
+        public IDialogBoxAnimation CurrentAnimation
         {
-            if (animationIndex < _dialogAnimations.Length)
-                return _dialogAnimations[animationIndex];
-            return null;
+            get
+            {
+                if (animationIndex < _dialogAnimations.Length)
+                    return _dialogAnimations[animationIndex];
+                return null;
+            }
         }
-    }
 
-    private void Awake()
-    {
-        _dialogAnimations = GetComponents<IDialogBoxAnimation>();
+        private void Awake()
+        {
+            _dialogAnimations = GetComponents<IDialogBoxAnimation>();
+        }
     }
 }

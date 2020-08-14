@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   use: 1
-  jitterRange: 5
+  jitterRange: 2.5
 --- !u!1 &6161619344866022909
 GameObject:
   m_ObjectHideFlags: 0

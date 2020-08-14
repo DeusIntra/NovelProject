@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
 
-public class TextAnimationHolder : MonoBehaviour
+namespace Novella.Dialog
 {
-    public int animationIndex = 0;
-
-    private ITextAnimation[] _textAnimations = null;
-
-    public ITextAnimation CurrentAnimation 
+    public class TextAnimationHolder : MonoBehaviour
     {
-        get
+        public int animationIndex = 0;
+
+        private ITextAnimation[] _textAnimations = null;
+
+        public ITextAnimation CurrentAnimation
         {
-            if (animationIndex < _textAnimations.Length)
-                return _textAnimations[animationIndex];
-            return null;
+            get
+            {
+                if (animationIndex < _textAnimations.Length)
+                    return _textAnimations[animationIndex];
+                return null;
+            }
         }
-    }
 
-    private void Awake()
-    {
-        _textAnimations = GetComponents<ITextAnimation>();
+        private void Awake()
+        {
+            _textAnimations = GetComponents<ITextAnimation>();
+        }
     }
 }
