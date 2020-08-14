@@ -4,10 +4,15 @@ using TMPro;
 using UnityEngine;
 using Novella.Dialog;
 
-public class TextJitterEffect : MonoBehaviour, ITextEffect
+public class TextVerticalCurveEffect : MonoBehaviour, ITextEffect
 {
+    
     public bool use = true;
-    public float jitterRange = 2f;
+    public string linkID = "curve";
+    public float amplitude = 2f;
+    public float speed = 2f;
+    public float charDifference = 0.3f;
+    public AnimationCurve curve;
 
     private TMP_Text _text;
     private TMP_TextInfo _textInfo;
@@ -15,6 +20,7 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
     private List<TMP_LinkInfo> _links;
     private Coroutine _coroutine;
     private TMP_MeshInfo[] _cachedMeshInfo;
+    private float _time;
 
     public void Apply(TMP_Text text)
     {
@@ -30,7 +36,7 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
 
         for (int i = 0; i < links.Length; i++)
         {
-            if (links[i].GetLinkID() == "jitter")
+            if (links[i].GetLinkID() == linkID)
             {
                 _links.Add(links[i]);
             }
@@ -39,6 +45,8 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
         if (_links.Count == 0) return;
 
         _cachedMeshInfo = _textInfo.CopyMeshInfoVertexData();
+
+        _time = 0f;
 
         _coroutine = StartCoroutine(AnimationCoroutine());
     }
@@ -56,6 +64,8 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
     {
         while (true)
         {
+            _time += Time.deltaTime * speed;
+
             foreach (TMP_LinkInfo linkInfo in _links)
             {
                 int firstIndex = linkInfo.linkTextfirstCharacterIndex;
@@ -65,8 +75,7 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
                 {
                     if (!_charInfo[i].isVisible) continue;
 
-                    float jitterX = Random.Range(0f, jitterRange) - jitterRange / 2;
-                    float jitterY = Random.Range(0f, jitterRange) - jitterRange / 2;
+                    float curveY = curve.Evaluate(_time + i * charDifference) * amplitude;
 
                     int charMaterialIndex = _charInfo[i].materialReferenceIndex;
                     TMP_MeshInfo meshInfo = _textInfo.meshInfo[charMaterialIndex];
@@ -76,7 +85,7 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
                     for (int j = 0; j < 4; j++)
                     {
                         Vector3 original = _cachedMeshInfo[charMaterialIndex].vertices[vertexIndex + j];
-                        charVerts[vertexIndex + j] = original + new Vector3(jitterX, jitterY, 0);
+                        charVerts[vertexIndex + j] = original + new Vector3(0, curveY, 0);
                     }
                 }
                 for (int i = 0; i < _textInfo.meshInfo.Length; i++)

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _quotes:
   - _characterName: 
-    _text: Oh man, I would <link=jitter>KILL</link> for an ice-cream.
+    _text: Oh man, I would <link=jitter>KILL</link> for an <link=sine>ice-cream.</link>
     _faceIcon: {fileID: 0}
     _character: {fileID: 0}
     _font: {fileID: 0}
