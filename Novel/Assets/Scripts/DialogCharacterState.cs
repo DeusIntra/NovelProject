@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Novella.Dialog
 {
@@ -12,9 +13,10 @@ namespace Novella.Dialog
         AppearFromTop, LeaveToTop 
     }
 
+    [Serializable]
     public class DialogCharacterState
     {
-        public DialogCharacter character;
+        public DialogCharacter Character;
         public string expression;
         public bool isDarkened;
         public Vector2 position;
