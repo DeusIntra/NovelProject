@@ -19,7 +19,13 @@ MonoBehaviour:
     _character: {fileID: 0}
     _font: {fileID: 0}
     _fontSize: 0
+  - _characterName: 
+    _text: And maybe some chocolate...
+    _faceIcon: {fileID: 0}
+    _character: {fileID: 0}
+    _font: {fileID: 0}
+    _fontSize: 0
   _nodeFont: {fileID: 0}
   _choices: []
-  _nextNode: {fileID: 11400000}
+  _nextNode: {fileID: 0}
   _onEndNode: {fileID: 0}

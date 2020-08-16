@@ -15,6 +15,7 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
     private List<TMP_LinkInfo> _links;
     private Coroutine _coroutine;
     private TMP_MeshInfo[] _cachedMeshInfo;
+    private bool _hasChanged;
 
     public void Apply(TMP_Text text)
     {
@@ -87,7 +88,7 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
                     _text.UpdateGeometry(meshInfo.mesh, i);
                 }
             }
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 

@@ -90,7 +90,7 @@ public class TextWordAnimation : MonoBehaviour, ITextAnimation
 
             currentWord++;
 
-            yield return new WaitForSeconds(1 / wordsPerSecond);
+            yield return new WaitForSecondsRealtime(1 / wordsPerSecond);
         }
     }
 }

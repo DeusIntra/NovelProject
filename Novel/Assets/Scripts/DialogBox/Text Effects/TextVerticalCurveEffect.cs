@@ -28,6 +28,7 @@ public class TextVerticalCurveEffect : MonoBehaviour, ITextEffect
 
         _text = text;
         _textInfo = text.textInfo;
+        _cachedMeshInfo = _textInfo.CopyMeshInfoVertexData();
         _charInfo = _textInfo.characterInfo;
         _links = new List<TMP_LinkInfo>();
         TMP_LinkInfo[] links = _textInfo.linkInfo;
@@ -44,7 +45,6 @@ public class TextVerticalCurveEffect : MonoBehaviour, ITextEffect
 
         if (_links.Count == 0) return;
 
-        _cachedMeshInfo = _textInfo.CopyMeshInfoVertexData();
 
         _time = 0f;
 
@@ -56,7 +56,7 @@ public class TextVerticalCurveEffect : MonoBehaviour, ITextEffect
         if (_coroutine != null)
         {
             StopCoroutine(_coroutine);
-            ResetVertices();
+            //ResetVertices();
         }
     }
 
@@ -96,7 +96,7 @@ public class TextVerticalCurveEffect : MonoBehaviour, ITextEffect
                     _text.UpdateGeometry(meshInfo.mesh, i);
                 }
             }
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 

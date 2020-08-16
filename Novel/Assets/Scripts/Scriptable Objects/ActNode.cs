@@ -9,7 +9,18 @@ namespace Novella.Dialog
         public List<DialogCharacterState> states;
         public List<ActTransition> transitions;
 
+        private int currentTransitionIndex;
 
+
+        public void ApplyTransition()
+        {
+
+        }
+
+        public void StopTransition()
+        {
+
+        }
         /*
         List<ActState> states;
         int currentStateIndex;

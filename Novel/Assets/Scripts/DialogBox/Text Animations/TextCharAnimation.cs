@@ -71,7 +71,7 @@ public class TextCharAnimation : MonoBehaviour, ITextAnimation
 
             visibleCount++;
 
-            yield return new WaitForSeconds(1 / charsPerSecond);
+            yield return new WaitForSecondsRealtime(1 / charsPerSecond);
         }
     }
 }
