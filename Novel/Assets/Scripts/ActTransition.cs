@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Novella.Dialog
+namespace Novella.Dialog.Act
 {
     [Serializable]
     public class ActTransition

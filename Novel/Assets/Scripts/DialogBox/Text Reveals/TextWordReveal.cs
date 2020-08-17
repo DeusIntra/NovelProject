@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using Novella.Dialog;
 
-public class TextWordAnimation : MonoBehaviour, ITextAnimation
+public class TextWordReveal : MonoBehaviour, ITextAnimation
 {
     public float wordsPerSecond = 5f;
 

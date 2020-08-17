@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Novella.Dialog
+namespace Novella.Dialog.Act
 {
     public enum TransitionType 
     { 
@@ -21,5 +21,6 @@ namespace Novella.Dialog
         public bool isDarkened;
         public Vector2 position;
         public TransitionType transitionType;
+        //public effect like jump or duck or other tween
     }
 }

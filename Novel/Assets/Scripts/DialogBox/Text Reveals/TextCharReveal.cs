@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using Novella.Dialog;
 
-public class TextCharAnimation : MonoBehaviour, ITextAnimation
+public class TextCharReveal : MonoBehaviour, ITextAnimation
 {
     public float charsPerSecond = 15f;
 

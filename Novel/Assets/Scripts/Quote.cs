@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Novella.Dialog
 {
     [Serializable]
-    public class Quote
+    public class Quote // should add "auto finish" and "hide dialog" fields
     {
         [SerializeField] private string _characterName = null;
         [SerializeField] [TextArea] private string _text = null;

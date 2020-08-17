@@ -25,6 +25,30 @@ MonoBehaviour:
     _character: {fileID: 0}
     _font: {fileID: 0}
     _fontSize: 0
+  - _characterName: 
+    _text: '<link=jitter>KILL</link>
+
+      <link=jitter>KILL</link>
+
+      <link=jitter>KILL</link>'
+    _faceIcon: {fileID: 0}
+    _character: {fileID: 0}
+    _font: {fileID: 0}
+    _fontSize: 0
+  - _characterName: 
+    _text: '<link=sine>ice-cream...</link>
+
+      and chocolate.'
+    _faceIcon: {fileID: 0}
+    _character: {fileID: 0}
+    _font: {fileID: 0}
+    _fontSize: 0
+  - _characterName: 
+    _text: <link=sine>ice-cream and chocolate...</link>
+    _faceIcon: {fileID: 0}
+    _character: {fileID: 0}
+    _font: {fileID: 0}
+    _fontSize: 0
   _nodeFont: {fileID: 0}
   _choices: []
   _nextNode: {fileID: 0}
