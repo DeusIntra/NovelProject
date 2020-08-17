@@ -6,7 +6,7 @@ namespace Novella.Dialog.Act
     [CreateAssetMenu(fileName = "New Act", menuName = "Scriptable Object/Dialog/Act", order = 52)]
     public class ActNode : ScriptableObject
     {
-        public List<GameObject> characterGameObjects;
+        public List<Actor> actors;
         public List<DialogCharacterState> characterStates;
         public List<ActTransition> transitions;
 
@@ -14,33 +14,69 @@ namespace Novella.Dialog.Act
 
         private ActTransition CurrentTransition => transitions[currentTransitionIndex];
 
-
-        public void ApplyTransition(GameObject parentPanel)
+        public void ApplyTransition()
         {
             if (currentTransitionIndex >= transitions.Count) return;
 
-            // find characters in transitions that are not in states
-            // and add them to states
-            foreach (DialogCharacterState characterState1 in CurrentTransition.CharacterStates)
-            {
-                foreach (DialogCharacterState characterState2 in characterStates)
-                {
-                    if (characterState1.Character == characterState2.Character)
-                        continue;
-                    else
-                        characterStates.Add(characterState1);
-                }
-            }
-
-            foreach (DialogCharacterState characterState in characterStates)
+            foreach (DialogCharacterState transitionState in CurrentTransition.CharacterStates)
             {
                 // find character GameObject in the scene or create if there is none
-                
-                
-                // apply animation and/or effect
 
+                Actor actor = null;
+                foreach (Actor loopActor in actors) // find actor on the scene
+                {
+                    if (loopActor.Character == transitionState.Character)
+                    {
+                        actor = loopActor;
+                        break;
+                    }
+                }
+
+                if (actor == null) // create actor if there is none
+                {
+                    GameObject actorObjet = Instantiate(new GameObject());
+                    actor = actorObjet.AddComponent<Actor>();
+                    actor.Instialize(transitionState.Character);
+                }
+
+                actor.ApplyTransition(transitionState);
+
+
+                /*
+                foreach (DialogCharacterState characterState in characterStates)
+                {
+                    if (transitionState.Character == characterState.Character)
+                        continue;
+                    else
+                        characterStates.Add(transitionState);                    
+                }
+
+                foreach (DialogCharacterState characterState in characterStates)
+                {
+                    // find character GameObject in the scene or create if there is none
+                    bool isPresent = false;
+                    Actor actor;
+                    foreach (Actor loopActor in actors)
+                    {
+                        if (loopActor.Character == characterState.Character)
+                        {
+                            actor = loopActor;
+                            isPresent = true;
+                            break;
+                        }
+                    }
+
+                    if (!isPresent) // create actor
+                    {
+                        GameObject actorObjet = Instantiate(new GameObject(), parentPanel);
+                        actor = actorObjet.AddComponent<Actor>();
+                        actor.Instialize(characterState.Character);
+                    }
+
+                    // apply animation and/or effect
+                    // actor.Move()
+                }*/
             }
-
 
             currentTransitionIndex++;
         }

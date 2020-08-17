@@ -17,9 +17,11 @@ namespace Novella.Dialog.Act
     public class DialogCharacterState
     {
         public DialogCharacter Character;
-        public string expression;
-        public bool isDarkened;
-        public Vector2 position;
+        //public string expression;
+        public bool flipHorizontally;
+        public bool flipVertically;
+        public bool isDarkened; // should make it into float 
+        public Vector2 relativePosition;
         public TransitionType transitionType;
         //public effect like jump or duck or other tween
     }
