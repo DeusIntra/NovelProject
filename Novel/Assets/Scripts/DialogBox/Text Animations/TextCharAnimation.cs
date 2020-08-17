@@ -8,7 +8,7 @@ public class TextCharAnimation : MonoBehaviour, ITextAnimation
     public float charsPerSecond = 15f;
 
     private bool _isAnimating;
-    private TMP_Text _text;
+    private TMP_Text _textComponent;
     private Coroutine _coroutine;
 
     public bool isAnimating()
@@ -18,7 +18,7 @@ public class TextCharAnimation : MonoBehaviour, ITextAnimation
 
     public void Animate(TMP_Text text)
     {
-        _text = text;
+        _textComponent = text;
         _coroutine = StartCoroutine(AnimationCoroutine());
     }
 
@@ -26,14 +26,15 @@ public class TextCharAnimation : MonoBehaviour, ITextAnimation
     {
         _isAnimating = false;
         StopCoroutine(_coroutine);
-        _text.maxVisibleCharacters = _text.textInfo.characterCount;
+        _textComponent.maxVisibleCharacters = _textComponent.textInfo.characterCount;
     }
 
     private IEnumerator AnimationCoroutine()
     {
-        _text.ForceMeshUpdate();
+        _textComponent.ForceMeshUpdate();
+        yield return new WaitForEndOfFrame();
 
-        TMP_TextInfo textInfo = _text.textInfo;
+        TMP_TextInfo textInfo = _textComponent.textInfo;
 
         int totalVisibleCharacters = textInfo.characterCount;
         int visibleCount = 0;
@@ -46,18 +47,14 @@ public class TextCharAnimation : MonoBehaviour, ITextAnimation
             yield break;
         }
 
-        TMP_LinkInfo[] links = textInfo.linkInfo;
-        if (links.Length > 0)
+        for (int i = 0; i < textInfo.linkCount; i++)
         {
-            for (int i = 0; i < links.Length; i++)
+            if (textInfo.linkInfo[i].GetLinkID() == "start from")
             {
-                if (links[i].GetLinkID() == "start from")
-                {
-                    visibleCount = links[i].linkTextfirstCharacterIndex;
-                    break;
-                }
+                visibleCount = textInfo.linkInfo[i].linkTextfirstCharacterIndex;
+                break;
             }
-        }
+        }        
 
         while (true)
         {
@@ -67,7 +64,7 @@ public class TextCharAnimation : MonoBehaviour, ITextAnimation
                 yield break;
             }
 
-            _text.maxVisibleCharacters = visibleCount;
+            _textComponent.maxVisibleCharacters = visibleCount;
 
             visibleCount++;
 

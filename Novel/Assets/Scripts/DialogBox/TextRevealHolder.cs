@@ -2,7 +2,7 @@
 
 namespace Novella.Dialog
 {
-    public class TextAnimationHolder : MonoBehaviour
+    public class TextRevealHolder : MonoBehaviour
     {
         [HideInInspector] public int animationIndex = 0;
 

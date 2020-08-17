@@ -8,7 +8,7 @@ public class TextWordAnimation : MonoBehaviour, ITextAnimation
     public float wordsPerSecond = 5f;
 
     private bool _isAnimating;
-    private TMP_Text _text;
+    private TMP_Text _textComponent;
     private Coroutine _coroutine;
 
     public bool isAnimating()
@@ -16,9 +16,9 @@ public class TextWordAnimation : MonoBehaviour, ITextAnimation
         return _isAnimating;
     }
 
-    public void Animate(TMP_Text text)
+    public void Animate(TMP_Text textComponent)
     {
-        _text = text;
+        _textComponent = textComponent;
         _coroutine = StartCoroutine(AnimationCoroutine());
     }
 
@@ -26,14 +26,12 @@ public class TextWordAnimation : MonoBehaviour, ITextAnimation
     {
         _isAnimating = false;
         StopCoroutine(_coroutine);
-        _text.maxVisibleCharacters = _text.textInfo.characterCount;
+        _textComponent.maxVisibleCharacters = _textComponent.textInfo.characterCount;
     }
 
     private IEnumerator AnimationCoroutine()
     {
-        _text.ForceMeshUpdate();
-
-        TMP_TextInfo textInfo = _text.textInfo;
+        TMP_TextInfo textInfo = _textComponent.textInfo;
         TMP_WordInfo[] wordInfo = textInfo.wordInfo;
 
         int totalVisibleCharacters = textInfo.characterCount;
@@ -49,27 +47,24 @@ public class TextWordAnimation : MonoBehaviour, ITextAnimation
             yield break;
         }
 
-        TMP_LinkInfo[] links = textInfo.linkInfo;
-        if (links.Length > 0)
+        // find the first link with ID "start from"
+        for (int i = 0; i < textInfo.linkCount; i++)
         {
-            for (int i = 0; i < links.Length; i++)
+            if (textInfo.linkInfo[i].GetLinkID() == "start from")
             {
-                if (links[i].GetLinkID() == "start from")
-                {
-                    int firstIndex = links[i].linkTextfirstCharacterIndex;
+                int firstIndex = textInfo.linkInfo[i].linkTextfirstCharacterIndex;
                     
-                    for (int j = 0; j < totalWordCount; j++)
+                for (int j = 0; j < totalWordCount; j++)
+                {
+                    if (wordInfo[j].firstCharacterIndex >= firstIndex)
                     {
-                        if (wordInfo[j].firstCharacterIndex >= firstIndex)
-                        {
-                            currentWord = j;
-                            break;
-                        }
+                        currentWord = j;
+                        break;
                     }
-                    break;
                 }
+                break;
             }
-        }
+        }        
 
         while (true)
         {
@@ -80,7 +75,7 @@ public class TextWordAnimation : MonoBehaviour, ITextAnimation
             else if (currentWord == totalWordCount)
                 visibleCount = totalVisibleCharacters;
 
-            _text.maxVisibleCharacters = visibleCount;
+            _textComponent.maxVisibleCharacters = visibleCount;
 
             if (visibleCount >= totalVisibleCharacters)
             {

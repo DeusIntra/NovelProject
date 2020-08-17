@@ -9,37 +9,32 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
     public bool use = true;
     public float jitterRange = 2f;
 
-    private TMP_Text _text;
-    private TMP_TextInfo _textInfo;
-    private TMP_CharacterInfo[] _charInfo;
+    private TMP_Text _textComponent;
     private List<TMP_LinkInfo> _links;
     private Coroutine _coroutine;
     private TMP_MeshInfo[] _cachedMeshInfo;
-    private bool _hasChanged;
 
-    public void Apply(TMP_Text text)
+    public void Apply(TMP_Text textComponent)
     {
         if (!use) return;
 
-        _text = text;
-        _textInfo = text.textInfo;
-        _charInfo = _textInfo.characterInfo;
+        textComponent.ForceMeshUpdate();
+
+        _textComponent = textComponent;
         _links = new List<TMP_LinkInfo>();
-        TMP_LinkInfo[] links = _textInfo.linkInfo;
+        TMP_TextInfo textInfo = textComponent.textInfo;
 
-        if (links.Length == 0) return;
-
-        for (int i = 0; i < links.Length; i++)
+        for (int i = 0; i < textInfo.linkCount; i++)
         {
-            if (links[i].GetLinkID() == "jitter")
+            if (textInfo.linkInfo[i].GetLinkID() == "jitter")
             {
-                _links.Add(links[i]);
+                _links.Add(textInfo.linkInfo[i]);
             }
         }
 
         if (_links.Count == 0) return;
 
-        _cachedMeshInfo = _textInfo.CopyMeshInfoVertexData();
+        _cachedMeshInfo = textInfo.CopyMeshInfoVertexData();
 
         _coroutine = StartCoroutine(AnimationCoroutine());
     }
@@ -49,12 +44,14 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
         if (_coroutine != null)
         {
             StopCoroutine(_coroutine);
-            ResetVertices();
+            // ResetVertices();
         }
     }
 
     private IEnumerator AnimationCoroutine()
     {
+        TMP_TextInfo textInfo = _textComponent.textInfo;
+
         while (true)
         {
             foreach (TMP_LinkInfo linkInfo in _links)
@@ -64,28 +61,30 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
 
                 for (int i = firstIndex; i < lastIndex; i++)
                 {
-                    if (!_charInfo[i].isVisible) continue;
+                    TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
+                    if (!charInfo.isVisible) continue;
 
                     float jitterX = Random.Range(0f, jitterRange) - jitterRange / 2;
                     float jitterY = Random.Range(0f, jitterRange) - jitterRange / 2;
 
-                    int charMaterialIndex = _charInfo[i].materialReferenceIndex;
-                    TMP_MeshInfo meshInfo = _textInfo.meshInfo[charMaterialIndex];
-                    Vector3[] charVerts = meshInfo.vertices;
+                    int materialIndex = charInfo.materialReferenceIndex;
+                    Vector3[] destinationVertices = textInfo.meshInfo[materialIndex].vertices;
 
-                    int vertexIndex = _charInfo[i].vertexIndex;
+                    int vertexIndex = charInfo.vertexIndex;
+
                     for (int j = 0; j < 4; j++)
                     {
-                        Vector3 original = _cachedMeshInfo[charMaterialIndex].vertices[vertexIndex + j];
-                        charVerts[vertexIndex + j] = original + new Vector3(jitterX, jitterY, 0);
+                        Vector3 original = _cachedMeshInfo[materialIndex].vertices[vertexIndex + j];
+                        destinationVertices[vertexIndex + j] = original + new Vector3(jitterX, jitterY, 0);
                     }
                 }
-                for (int i = 0; i < _textInfo.meshInfo.Length; i++)
+
+                for (int i = 0; i < textInfo.meshInfo.Length; i++)
                 {
-                    var meshInfo = _textInfo.meshInfo[i];
+                    TMP_MeshInfo meshInfo = textInfo.meshInfo[i];
                     meshInfo.mesh.vertices = meshInfo.vertices;
 
-                    _text.UpdateGeometry(meshInfo.mesh, i);
+                    _textComponent.UpdateGeometry(meshInfo.mesh, i);
                 }
             }
             yield return new WaitForFixedUpdate();
@@ -94,25 +93,32 @@ public class TextJitterEffect : MonoBehaviour, ITextEffect
 
     private void ResetVertices()
     {
-        for (int i = 0; i < _textInfo.characterCount; i++)
+        if (_cachedMeshInfo == null) return;
+
+        TMP_TextInfo textInfo = _textComponent.textInfo;
+
+        for (int i = 0; i < textInfo.characterCount; i++)
         {
-            int charMaterialIndex = _charInfo[i].materialReferenceIndex;
-            TMP_MeshInfo meshInfo = _textInfo.meshInfo[charMaterialIndex];
-            Vector3[] charVerts = meshInfo.vertices;
-            int vertexIndex = _charInfo[i].vertexIndex;
+            TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
+
+            int materialIndex = charInfo.materialReferenceIndex;
+            Vector3[] destinationVertices = textInfo.meshInfo[materialIndex].vertices;
+
+            int vertexIndex = charInfo.vertexIndex;
+
             for (int j = 0; j < 4; j++)
             {
-                Vector3 original = _cachedMeshInfo[charMaterialIndex].vertices[vertexIndex + j];
-                charVerts[vertexIndex + j] = original;
+                Vector3 original = _cachedMeshInfo[materialIndex].vertices[vertexIndex + j];
+                destinationVertices[vertexIndex + j] = original;
             }
         }
 
-        for (int i = 0; i < _textInfo.meshInfo.Length; i++)
+        for (int i = 0; i < textInfo.meshInfo.Length; i++)
         {
-            var meshInfo = _textInfo.meshInfo[i];
+            TMP_MeshInfo meshInfo = textInfo.meshInfo[i];
             meshInfo.mesh.vertices = meshInfo.vertices;
 
-            _text.UpdateGeometry(meshInfo.mesh, i);
+            _textComponent.UpdateGeometry(meshInfo.mesh, i);
         }
     }
 }

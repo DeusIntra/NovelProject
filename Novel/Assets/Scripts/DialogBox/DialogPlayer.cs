@@ -9,7 +9,7 @@ namespace Novella.Dialog
         [SerializeField] private Novella.GameEvent _onDialogPlay = null;
         [SerializeField] private Novella.GameEvent _onDialogClose = null;
         [SerializeField] private TextMeshProUGUI _bodyText = null;
-        [SerializeField] private TextAnimationHolder _textAnimHolder = null;
+        [SerializeField] private TextRevealHolder _textAnimHolder = null;
         [SerializeField] private TextEffectHolder _textEffectHolder = null;
         [SerializeField] private DialogBoxAnimationHolder _dialogAnimHolder = null;
 
