@@ -8,14 +8,14 @@ namespace Novella.Dialog.Act
     {
         private RectTransform _rectTransform;
         private DialogCharacter _dialogCharacter = null;
-        private GameObject _parent = null;
-        private RectTransform _parentRectTransform = null;
+        private StageForActors _stage = null;
+        private RectTransform _stageRectTransform = null;
 
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
-            _parent = GameObject.FindWithTag("Stage for Actors"); // find by script
-            _parentRectTransform = _parent.GetComponent<RectTransform>();
+            _stage = FindObjectOfType<StageForActors>();
+            _stageRectTransform = _stage.GetComponent<RectTransform>();
         }
 
         public DialogCharacter Character => _dialogCharacter;
@@ -25,20 +25,21 @@ namespace Novella.Dialog.Act
             _dialogCharacter = dialogCharacter;
 
             Image imageComponent = gameObject.AddComponent<Image>();
-            imageComponent.sprite = _dialogCharacter.BodyImage;            
+            imageComponent.sprite = _dialogCharacter.BodyImage;
+            imageComponent.SetNativeSize();
+
+            transform.SetParent(_stage.transform);
         }
 
         public void ApplyTransition(DialogCharacterState transition)
         {
+            if (_rectTransform == null) _rectTransform = GetComponent<RectTransform>();
+            Vector2 scale = _rectTransform.localScale; // null refrence
             if (transition.flipHorizontally)
-            {
-
-            }
+                _rectTransform.localScale = new Vector2(-scale.x, scale.y);
 
             if (transition.flipVertically)
-            {
-
-            }
+                _rectTransform.localScale = new Vector2(scale.x, -scale.y);
 
             if (transition.isDarkened) Darken();
             else Lighten();
@@ -58,12 +59,14 @@ namespace Novella.Dialog.Act
 
         private void Move(Vector2 relativePosition, TransitionType transitionType = TransitionType.None)
         {
-            float panelWidth = Screen.width + _parentRectTransform.sizeDelta.x;
-            float panelHeight = Screen.width + _parentRectTransform.sizeDelta.y;
-            Vector2 destination;
+            Vector2 destination = new Vector2(_stage.Width * relativePosition.x, _stage.Height * relativePosition.y);
+
+            Debug.Log($"{_stage.Width}, {_stage.Height}");
+
             switch (transitionType)
             {
                 case TransitionType.None:
+                    _rectTransform.anchoredPosition = destination;
                     break;
                 case TransitionType.Linear:
                     break;
