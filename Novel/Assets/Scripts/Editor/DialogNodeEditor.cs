@@ -9,6 +9,7 @@ public class DialogNodeEditor : Editor
     private SerializedProperty _script;
     private SerializedProperty _quotesProperty;
     private SerializedProperty _choicesProperty;
+    private SerializedProperty _actNodeProperty;
     private SerializedProperty _nextNodeProperty;
     private SerializedProperty _onEndNodeProperty;
     private ReorderableList _list;
@@ -18,6 +19,7 @@ public class DialogNodeEditor : Editor
         _script = serializedObject.FindProperty("m_Script");
         _quotesProperty = serializedObject.FindProperty("_quotes");
         _choicesProperty = serializedObject.FindProperty("_choices");
+        _actNodeProperty = serializedObject.FindProperty("_actNode");
         _nextNodeProperty = serializedObject.FindProperty("_nextNode");
         _onEndNodeProperty = serializedObject.FindProperty("_onEndNode");
 
@@ -37,6 +39,8 @@ public class DialogNodeEditor : Editor
         EditorGUILayout.PropertyField(_choicesProperty);
 
         EditorGUILayout.Space();
+
+        EditorGUILayout.PropertyField(_actNodeProperty);
 
         EditorGUILayout.HelpBox(
             "Next\u00A0Node field will only be active if Choices size is\u00A00. " +

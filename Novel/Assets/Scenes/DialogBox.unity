@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 310845273}
   - component: {fileID: 310845276}
   - component: {fileID: 310845275}
+  - component: {fileID: 310845277}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -412,6 +413,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &310845277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310845271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89dae2fb22c866b479a021fe55ba11eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogCharacter: {fileID: 11400000, guid: bd602924dcf9d534e98d00c5542ec1fc, type: 2}
 --- !u!1 &372805271
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +513,7 @@ MonoBehaviour:
         m_MethodName: StartDialog
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: c1ad611832c824e439994dbceba3fc0a,
+          m_ObjectArgument: {fileID: 11400000, guid: 5e6803a0ee95bc747b563114c457a233,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: Novella.Dialog.DialogNode, Assembly-CSharp
           m_IntArgument: 0
@@ -759,7 +773,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.8
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

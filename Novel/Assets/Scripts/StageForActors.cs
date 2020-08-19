@@ -14,5 +14,10 @@ namespace Novella.Dialog.Act
             _rectTransform = GetComponent<RectTransform>();
         }
 
+        public void Next()
+        {
+
+        }
+
     }
 }
