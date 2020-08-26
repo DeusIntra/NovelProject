@@ -6,30 +6,43 @@ namespace Novella.Dialog.Act
     [CreateAssetMenu(fileName = "New Act Node", menuName = "Scriptable Object/Dialog/Act Node", order = 52)]
     public class ActNode : ScriptableObject
     {
-        public List<Actor> actors;
-        public int currentTransitionIndex;
+        public List<ActorToCreate> actorsToCreate;
+
+        private List<Actor> _actors;
+        private int _currentTransitionIndex;
+
+        public void Initialize(Transform stage)
+        {
+            _actors = new List<Actor>();
+            _currentTransitionIndex = 0;
+
+            foreach (var actorToCreate in actorsToCreate)
+            {
+                GameObject actorGameObject = new GameObject();
+                Actor actor = actorGameObject.AddComponent<Actor>();
+                _actors.Add(actor);
+
+                actor.transform.SetParent(stage);
+
+                actor.Initialize(actorToCreate);
+            }
+        }
 
         public void NextTransition()
         {
-            for (int i = actors.Count - 1; i >= 0; i--)
+            for (int i = _actors.Count - 1; i >= 0; i--)
             {
-                if (actors[i].TransitionCount <= currentTransitionIndex)
+                if (_actors[i].TransitionCount <= _currentTransitionIndex)
                 {
-                    GameObject actorGameObject = actors[i].gameObject;
-                    actors.RemoveAt(i);
+                    GameObject actorGameObject = _actors[i].gameObject;
+                    _actors.RemoveAt(i);
                     Destroy(actorGameObject);
                     continue;
                 }
 
-                if (currentTransitionIndex == 0)
-                {
-                    actors[i].ApplyTransition(currentTransitionIndex);
-                    currentTransitionIndex++;
-                }
+                _actors[i].ApplyTransition(_currentTransitionIndex);
 
-                actors[i].ApplyTransition(currentTransitionIndex);
-
-                currentTransitionIndex++;
+                _currentTransitionIndex++;
             }
         }
     }

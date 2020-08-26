@@ -20,7 +20,7 @@ namespace Novella.Dialog
         public string Name => _name;
         public Sprite FaceIcon => _faceIcon;
         // public Dictionary<string, Sprite> Expressions => _expressions;
-        public Sprite BodyImage => _bodyImage;
+        public Sprite BodySprite => _bodyImage;
         public Vector2 BodyImageScale => _bodyImageScale;
         public TMP_FontAsset Font => _font;
         public int FontSize => _fontSize;

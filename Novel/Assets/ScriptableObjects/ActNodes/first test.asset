@@ -12,27 +12,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52bef97962ec744c84fc587a9a7e882, type: 3}
   m_Name: first test
   m_EditorClassIdentifier: 
-  characterStates: []
-  transitions:
-  - _characterStates:
-    - Character: {fileID: 11400000, guid: bd602924dcf9d534e98d00c5542ec1fc, type: 2}
-      relativePosition: {x: 0.6, y: -0.6}
-      transitionType: 0
+  actorsToCreate:
+  - _character: {fileID: 11400000, guid: bd602924dcf9d534e98d00c5542ec1fc, type: 2}
+    _initialState:
+      position: {x: 0, y: 0}
+      relativePosition: {x: 0, y: 0}
       flipHorizontally: 0
       flipVertically: 0
-      isDarkened: 0
-  - _characterStates:
-    - Character: {fileID: 11400000, guid: bd602924dcf9d534e98d00c5542ec1fc, type: 2}
-      relativePosition: {x: -0.6, y: -0.6}
-      transitionType: 0
-      flipHorizontally: 0
-      flipVertically: 0
-      isDarkened: 0
-  - _characterStates:
-    - Character: {fileID: 11400000, guid: bd602924dcf9d534e98d00c5542ec1fc, type: 2}
-      relativePosition: {x: 0, y: -0.6}
-      transitionType: 0
-      flipHorizontally: 0
-      flipVertically: 0
-      isDarkened: 0
-  - _characterStates: []
+      darkness: 0
+      opacity: 1
+    _transitions:
+    - useTransition: 1
+      actorState:
+        position: {x: 0, y: 0}
+        relativePosition: {x: -1, y: -1}
+        flipHorizontally: 0
+        flipVertically: 0
+        darkness: 0
+        opacity: 1
+      type: 1
+    - useTransition: 1
+      actorState:
+        position: {x: 0, y: 0}
+        relativePosition: {x: -0.5, y: -1}
+        flipHorizontally: 0
+        flipVertically: 0
+        darkness: 0
+        opacity: 1
+      type: 1
+    - useTransition: 1
+      actorState:
+        position: {x: 0, y: 0}
+        relativePosition: {x: 0, y: -1}
+        flipHorizontally: 0
+        flipVertically: 0
+        darkness: 0
+        opacity: 1
+      type: 1
+    - useTransition: 1
+      actorState:
+        position: {x: 0, y: 0}
+        relativePosition: {x: 0, y: -0.5}
+        flipHorizontally: 0
+        flipVertically: 0
+        darkness: 0
+        opacity: 1
+      type: 1
+    - useTransition: 1
+      actorState:
+        position: {x: 0, y: 0}
+        relativePosition: {x: 0, y: 0}
+        flipHorizontally: 0
+        flipVertically: 0
+        darkness: 0
+        opacity: 1
+      type: 1

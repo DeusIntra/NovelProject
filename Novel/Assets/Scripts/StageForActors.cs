@@ -4,6 +4,8 @@ namespace Novella.Dialog.Act
 {
     public class StageForActors : MonoBehaviour
     {
+        public ActNode actNode;
+
         private RectTransform _rectTransform;
 
         public float Width => Screen.width + _rectTransform.sizeDelta.x;
@@ -14,9 +16,14 @@ namespace Novella.Dialog.Act
             _rectTransform = GetComponent<RectTransform>();
         }
 
+        private void Start()
+        {
+            actNode.Initialize(transform);
+        }
+
         public void Next()
         {
-
+            actNode.NextTransition();
         }
 
     }

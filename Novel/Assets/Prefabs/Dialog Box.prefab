@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88b026f46d0bd54787ec27f2ed39a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actNode: {fileID: 0}
 --- !u!1 &1034841560311941393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,6 +1330,7 @@ MonoBehaviour:
   _textAnimHolder: {fileID: 5721539897193398545}
   _textEffectHolder: {fileID: 437255129944402622}
   _dialogAnimHolder: {fileID: 5721539897324327697}
+  _stageForActors: {fileID: 6993880215875151916}
 --- !u!1 &9020647871387841800
 GameObject:
   m_ObjectHideFlags: 0

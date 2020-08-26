@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Novella.Dialog.Act;
+using TMPro;
 using UnityEngine;
 
 namespace Novella.Dialog
@@ -12,6 +13,7 @@ namespace Novella.Dialog
         [SerializeField] private TextRevealHolder _textAnimHolder = null;
         [SerializeField] private TextEffectHolder _textEffectHolder = null;
         [SerializeField] private DialogBoxAnimationHolder _dialogAnimHolder = null;
+        [SerializeField] private StageForActors _stageForActors = null;
 
         private ITextAnimation _textAnimation;
         private IDialogBoxAnimation _dialogBoxAnimation;
@@ -25,9 +27,9 @@ namespace Novella.Dialog
             _dialogBoxAnimation = _dialogAnimHolder.CurrentAnimation;
         }
 
-        public void StartDialog(DialogNode firstNode)
+        public void StartDialog(DialogNode firstDialogNode)
         {
-            _currentNode = firstNode;
+            _currentNode = firstDialogNode;
             _dialogBoxAnimation.Open(gameObject);
             PlayDialog();
         }
@@ -77,6 +79,8 @@ namespace Novella.Dialog
                 }
                 return;
             }
+
+            _stageForActors.Next();
 
             _dialogVisualizer.ShowFaceIcon(quote);
             _dialogVisualizer.SetTextStyle(quote);
