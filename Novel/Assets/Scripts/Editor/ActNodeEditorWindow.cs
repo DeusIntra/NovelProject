@@ -20,6 +20,8 @@ public class ActNodeEditorWindow : ExtendedEditorWindow
 
     private void OnGUI()
     {
+        serializedObject.Update();
+
         currentProperty = serializedObject.FindProperty("actorsToCreate");
 
         EditorGUILayout.BeginHorizontal();

@@ -6,7 +6,7 @@ namespace Novella.Dialog.Act
     [Serializable]
     public struct ActorState
     {
-        public Vector2 position;
+        [HideInInspector] public Vector2 position;
         public Vector2 relativePosition;
         public bool flip;
         public float scale;

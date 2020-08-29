@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 public class ExtendedEditorWindow : EditorWindow
@@ -42,11 +43,39 @@ public class ExtendedEditorWindow : EditorWindow
 
         foreach (SerializedProperty property in serializedProperty)
         {
-            if (GUILayout.Button(property.displayName))
+            string buttonText = property.displayName;
+            SerializedProperty characterProp = property.FindPropertyRelative("_character");
+
+            try // i hate this part but it's the only way it can work
+            {
+                SerializedObject character = new SerializedObject(characterProp.objectReferenceValue);
+                SerializedProperty name = character.FindProperty("_name");
+                buttonText = name.stringValue;                    
+            }
+            catch (ArgumentException) { }
+            catch (NullReferenceException) { }
+
+            EditorGUILayout.BeginHorizontal();
+
+            if (GUILayout.Button(buttonText, GUILayout.Width(160)))
             {
                 _selectedPropertyPath = property.propertyPath;
-                selected = true;
+                selected = true;                
             }
+
+            if (GUILayout.Button("-"))
+            {
+                property.DeleteCommand();
+            }
+
+            EditorGUILayout.EndHorizontal();
+        }
+
+        GUILayout.Space(10);
+
+        if (GUILayout.Button("Add Actor"))
+        {
+            serializedProperty.arraySize += 1;
         }
 
         if (!string.IsNullOrEmpty(_selectedPropertyPath))
