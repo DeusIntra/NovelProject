@@ -1136,12 +1136,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialog Box
       objectReference: {fileID: 0}
-    - target: {fileID: 6993880215875151916, guid: 2122c47d1d5d65e4c8e4b9818a7e9d76,
-        type: 3}
-      propertyPath: actNode
-      value: 
-      objectReference: {fileID: 11400000, guid: 82d861696655dfc4ab65e1170e144129,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2122c47d1d5d65e4c8e4b9818a7e9d76, type: 3}
 --- !u!224 &1543830486 stripped

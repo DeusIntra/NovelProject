@@ -9,7 +9,7 @@ namespace Novella.Dialog
     [CreateAssetMenu(fileName = "New Dialog Node", menuName = "Scriptable Object/Dialog/Node", order = 52)]
     public class DialogNode : ScriptableObject
     {
-        #region Internal classes
+        #region Internal Classes
 
         [Serializable]
         public class Choice
@@ -25,7 +25,7 @@ namespace Novella.Dialog
 
         #endregion
 
-        #region Fields and properties
+        #region Fields and Properties
 
         [SerializeField] private List<Quote> _quotes = new List<Quote>();
         [SerializeField] private TMP_FontAsset _nodeFont;
@@ -49,7 +49,7 @@ namespace Novella.Dialog
 
         #endregion
 
-        #region Public methods
+        #region Public Methods
 
         public Quote NextQuote()
         {

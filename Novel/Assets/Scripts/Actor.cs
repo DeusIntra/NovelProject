@@ -45,6 +45,8 @@ namespace Novella.Dialog.Act
             SetImageScale();
 
             gameObject.name = character.name + " Actor";
+
+            Move(currentState.relativePosition);
         }
 
         public void ApplyTransition(int index)
@@ -53,7 +55,7 @@ namespace Novella.Dialog.Act
 
             if (index >= TransitionCount) return;
 
-            if (transitions[index] == null || !transitions[index].useTransition) return;
+            if (transitions[index] == null) return;
 
             ActorState nextState = transitions[index].actorState;
 
@@ -146,14 +148,5 @@ namespace Novella.Dialog.Act
 
         #endregion
 
-        [ContextMenu("Debug")]
-        public void text()
-        {
-            float canvasHeight = _parentCanvasRectTransform.sizeDelta.y;
-            float canvasScale = _parentCanvasRectTransform.localScale.y;
-            Debug.Log($"canvas height: {canvasHeight}");
-            Debug.Log($"height * scale: {canvasHeight * canvasScale}");
-        }
-        
     }
 }

@@ -17,53 +17,77 @@ MonoBehaviour:
     _initialState:
       position: {x: 0, y: 0}
       relativePosition: {x: 0, y: 0}
-      flipHorizontally: 0
-      flipVertically: 0
+      flip: 0
+      scale: 0
       darkness: 0
       opacity: 1
     _transitions:
-    - useTransition: 1
-      actorState:
-        position: {x: 0, y: 0}
-        relativePosition: {x: -1, y: -1}
-        flipHorizontally: 0
-        flipVertically: 0
-        darkness: 0
-        opacity: 1
-      type: 1
-    - useTransition: 1
-      actorState:
-        position: {x: 0, y: 0}
-        relativePosition: {x: -0.5, y: -1}
-        flipHorizontally: 0
-        flipVertically: 0
-        darkness: 0
-        opacity: 1
-      type: 1
-    - useTransition: 1
-      actorState:
-        position: {x: 0, y: 0}
-        relativePosition: {x: 0, y: -1}
-        flipHorizontally: 0
-        flipVertically: 0
-        darkness: 0
-        opacity: 1
-      type: 1
-    - useTransition: 1
-      actorState:
-        position: {x: 0, y: 0}
-        relativePosition: {x: 0, y: -0.5}
-        flipHorizontally: 0
-        flipVertically: 0
-        darkness: 0
-        opacity: 1
-      type: 1
-    - useTransition: 1
+    - useTransition: 0
       actorState:
         position: {x: 0, y: 0}
         relativePosition: {x: 0, y: 0}
-        flipHorizontally: 0
-        flipVertically: 0
+        flip: 0
+        scale: 0
         darkness: 0
-        opacity: 1
-      type: 1
+        opacity: 0
+      type: 0
+      timeInSeconds: 0
+    - useTransition: 0
+      actorState:
+        position: {x: 0, y: 0}
+        relativePosition: {x: 0, y: 0}
+        flip: 0
+        scale: 0
+        darkness: 0
+        opacity: 0
+      type: 0
+      timeInSeconds: 0
+    - useTransition: 0
+      actorState:
+        position: {x: 0, y: 0}
+        relativePosition: {x: 0, y: 0}
+        flip: 0
+        scale: 0
+        darkness: 0
+        opacity: 0
+      type: 0
+      timeInSeconds: 0
+    - useTransition: 0
+      actorState:
+        position: {x: 0, y: 0}
+        relativePosition: {x: 0, y: 0}
+        flip: 0
+        scale: 0
+        darkness: 0
+        opacity: 0
+      type: 0
+      timeInSeconds: 0
+    - useTransition: 0
+      actorState:
+        position: {x: 0, y: 0}
+        relativePosition: {x: 0, y: 0}
+        flip: 0
+        scale: 0
+        darkness: 0
+        opacity: 0
+      type: 0
+      timeInSeconds: 0
+  - _character: {fileID: 0}
+    _initialState:
+      position: {x: 0, y: 0}
+      relativePosition: {x: 0, y: 0}
+      flip: 0
+      scale: 0
+      darkness: 0
+      opacity: 1
+    _transitions:
+    - useTransition: 0
+      actorState:
+        position: {x: 0, y: 0}
+        relativePosition: {x: 0, y: 0}
+        flip: 0
+        scale: 0
+        darkness: 0
+        opacity: 0
+      type: 0
+      timeInSeconds: 0

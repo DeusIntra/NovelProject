@@ -7,6 +7,12 @@ public class ActNodeEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+
+        if (GUILayout.Button("Open Editor"))
+        {
+            ActNodeEditorWindow.Open((ActNode)target);
+        }
+
         DrawDefaultInspector();
     }
 }

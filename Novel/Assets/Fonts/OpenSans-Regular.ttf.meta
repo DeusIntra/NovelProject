@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 85498a1a7a938a24c80cc514805b0bf8
+guid: 3cb3aeb082eb81f4fb715dfcff5734bd
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,11 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Roboto Condensed
   fontNames:
-  - Roboto Condensed
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: 2100ec9278a8ba5449050d6e983f9fb0, type: 3}
+  - Open Sans
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
